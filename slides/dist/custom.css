@@ -13,3 +13,7 @@
 #cc-license img {
     margin: 0px 0px;
 }
+
+.reveal .text-small {
+    font-size: small
+}
