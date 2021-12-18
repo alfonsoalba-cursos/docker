@@ -76,7 +76,7 @@ Podéis encontrar información más detallada en el enlace de la diapositiva.
 
 * Una vez instalado dispondremos del icono en la barra del escritorio
 
-![windows systray](images/whale-icon-systray-windows.png)<!-- .element: class="plain"-->
+![windows systray](../../images/whale-icon-systray-windows.png)<!-- .element: class="plain"-->
 
 
 ^^^^^^

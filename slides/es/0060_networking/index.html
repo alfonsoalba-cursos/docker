@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Networking</title>
+
+		<link rel="stylesheet" href="../../dist/reset.css">
+		<link rel="stylesheet" href="../../dist/reveal.css">
+		<link rel="stylesheet" href="../../dist/custom.css">
+		<link rel="stylesheet" href="../../dist/theme/sky.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../../plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div id="cc-license">
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
+					<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" />
+				</a>
+				This work is licensed under a 
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+			</div>
+
+			<div class="slides">
+				<section>
+					<h2>Curso de Introducción a Docker</h2>
+						<p><img src="../../images/horizontal-logo-monochromatic-white.png" height="75" class="plain" /></p>
+					<h4>Alfonso Alba García</h4>
+					<p>
+						<small>📩alfonso@alfonsoalba.com</small>
+						<br/>
+						<small><a href="https://www.twitter.com/aalbagarcia" target="_blank">@aalbagarcia</a></small>
+						<br/>
+						<small><a href="https://es.linkedin.com/in/alfonsoalbagarcia" target="_blank">LinkedIn</a></small>
+					</p>                                        
+				</section>
+
+				<section data-markdown="toc.md"
+					 data-separator="^------"
+					 data-separator-vertical="^\^\^\^\^\^\^"
+					 data-charset="utf8">
+				</section>
+
+				<section
+					id="networking-overview" 
+					data-markdown="networking-overview.md"
+					data-separator="^------"
+					data-separator-vertical="^\^\^\^\^\^\^"
+					data-charset="utf8">
+				</section>
+
+				<section
+					id="default-bridge-networks" 
+					data-markdown="default-bridge-networks.md"
+					data-separator="^------"
+					data-separator-vertical="^\^\^\^\^\^\^"
+					data-charset="utf8">
+				</section>
+
+				<section
+					id="user-defined-bridge-networks" 
+					data-markdown="user-defined-bridge-networks.md"
+					data-separator="^------"
+					data-separator-vertical="^\^\^\^\^\^\^"
+					data-charset="utf8">
+				</section>
+				
+				<section
+					id="docker-network-command-summary" 
+					data-markdown="docker-network-command-summary.md"
+					data-separator="^------"
+					data-separator-vertical="^\^\^\^\^\^\^"
+					data-charset="utf8">
+				</section>
+
+				<section
+					id="host-networking" 
+					data-markdown="host-networking.md"
+					data-separator="^------"
+					data-separator-vertical="^\^\^\^\^\^\^"
+					data-charset="utf8">
+				</section>	
+				
+				<section
+					id="overlay-networks" 
+					data-markdown="overlay-networks.md"
+					data-separator="^------"
+					data-separator-vertical="^\^\^\^\^\^\^"
+					data-charset="utf8">
+				</section>
+
+				<section
+					id="macvlan-networks" 
+					data-markdown="macvlan-networks.md"
+					data-separator="^------"
+					data-separator-vertical="^\^\^\^\^\^\^"
+					data-charset="utf8">
+				</section>
+
+				<section
+					id="exercise" 
+					data-markdown="exercise.md"
+					data-separator="^------"
+					data-separator-vertical="^\^\^\^\^\^\^"
+					data-charset="utf8">
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../../dist/reveal.js"></script>
+		<script src="../../plugin/notes/notes.js"></script>
+		<script src="../../plugin/markdown/markdown.js"></script>
+		<script src="../../plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>

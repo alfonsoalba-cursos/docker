@@ -56,7 +56,7 @@ la siguiente diapositiva veremos un ejemplo.
 
 _Understand build context_
 
-![Ejemplo de contexto](images/context-example.png)
+![Ejemplo de contexto](../../images/context-example.png)
 
 Con una estructura de carpetas como esta, el comando para construir nuestra imagen
 sería:
