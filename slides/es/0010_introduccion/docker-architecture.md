@@ -61,7 +61,6 @@ en el caso del último comando, levantar un contenedor.
 
 ### Ejemplos de Docker Registries
 
-* [Docker Trusted Registry (DTR)](https://docs.docker.com/ee/dtr/)
 * [Red Hat Quay.io](https://quay.io/)
 * [Docker Registry](https://docs.docker.com/registry/)
 * [Portus](http://port.us.org/)
@@ -69,19 +68,8 @@ en el caso del último comando, levantar un contenedor.
 [Google](https://cloud.google.com/container-registry/), 
 [Azure](https://azure.microsoft.com/en-in/services/container-registry/),
 [Alibaba](https://www.alibabacloud.com/product/container-registry)
+
 notes:
-
-DTR: 
-
-* DTR se puede instalar dentro la infraestructura de una organización con objeto de instalar distribuir imágenes
-privadas dentro de la organización (o en la nube) de forma segura.
-* Por ejemplo: se pueden almacenar aquí las imágenes que consumen los sistema de integración contínua para hacer los despliegues automatizados
-* Interfaz web para gestión de imágenes de la organización
-* Escaneo de seguridad de las imágenes
-* Firmado de imágenes
-* Integración con LDAP
-
-Se ofrece con un un add-on para Docker Enterprise de tipo Standard o superior.
 
 Quay.io:
 

@@ -11,6 +11,7 @@
   * [Debian](https://docs.docker.com/install/linux/docker-ce/debian/)
   * [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
   * [Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+* Todas las versiones y arquitecturas soportadas [aqui](https://docs.docker.com/engine/install/).
 
 ^^^^^^
 
@@ -48,12 +49,15 @@ Podéis encontrar información más detallada en el enlace de la diapositiva.
 ### Requisitos del sistema
 <!-- .slide: data-background="../../images/windows.png" data-background-size="100vh" data-background-opacity="0.2"-->
 
-* Windows 10 64-bit: Pro, Enterprise, or Education (Build 15063 o posterior).
-* Activar las características Hyper-V y Containers Windows
+* Dos opciones de ejecución: WSL2 o Hyper-V
+* WSL2 recomendada (mejor rendimiento)
+* Windows 11 64-bit: Home, Pro, Enterprise o Education versión 21H2 o posterior
+* Windows 10 64-bit: Home o Pro (Build >=19041) Enterprise o Education 1909 (build >=18363).
+* Activar la característica WSL2 de Windows
 * Procesador de 64 bit con Second Level Address Translation (SLAT)
 * 4GB  RAM
-* Activar a nivel de BIOS el soporte de virtualización de hardware
-* [Más información sobre virtualización](https://docs.docker.com/docker-for-windows/troubleshoot/#virtualization-must-be-enabled)
+* Activar a nivel de BIOS el soporte de virtualización de hardware ([Más información sobre virtualización](https://docs.docker.com/docker-for-windows/troubleshoot/#virtualization-must-be-enabled))
+* Instalación de [Linux kernel update package](https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 
 ^^^^^^
 
@@ -62,12 +66,6 @@ Podéis encontrar información más detallada en el enlace de la diapositiva.
 
 
 * Descargar e instalar "Docker Desktop for Windows"
-* Instala los siguientes programaas
-  * Docker Engine
-  * Docker CLI
-  * [Docker Compose](https://docs.docker.com/compose/)
-  * [Docker Machine](https://docs.docker.com/machine/overview/)
-  * [Kitematic (legacy)](https://docs.docker.com/kitematic/userguide/)
 
 ^^^^^^
 
@@ -126,7 +124,20 @@ notes:
 
 ^^^^^^
 
+### Windows + Linux containers
+
+Más dificil ahora que LCOW ha sido abandonado.
+
+notes:
+
+Algunos ejemplos de cómo podríamos conseguirlo:
+* https://tobiasfenster.io/running-linux-and-windows-containers-at-the-same-time-on-windows-10
+* https://lippertmarkus.com/2021/09/04/containers-without-docker-desktop/
+^^^^^^
+
 ### LCOW (Linux Containers On Windows)
+
+⚠️ [DEPRECATED](https://github.com/linuxkit/lcow) ⚠️
 
 * Disponible a partir de Windows 10 Professional, Windows 10 Enterprise o Windows Server 2019 **version 1809**
 * Permite ejecutar contenedores windows y linux simultáneamente
