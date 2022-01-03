@@ -24,7 +24,7 @@ e209a5b9818f   node:10-alpine  "docker-entrypoint.s…"   18 minutes ago   Up 18
 * Ejecuta `docker ps` en tu máquina. No deberías tener ningún contenedor en ejecución
 * Ejecuta `docker ps -a`. Deberías ver los dos contenedores que hemos ejecutado hasta el momento:
   * `hello-world` en el módulo 1 del curso durante la instalación
-  * `becorecode/curso-intro-docker-modulo-2` que hemos creado al iniciar el módulo 2
+  * `kubernetescourse/slides-docker` que hemos creado al iniciar el módulo 2
 
 notes:
 
@@ -57,7 +57,7 @@ Siguiendo la recomendación que hacen en el blog, nosotros usaremos la nueva nom
 
 * Vuelve a levantar el contenedor de las diapositivas como se indicó en la sección anterior
   ```bash
-    docker run --rm becorecode/curso-intro-docker-modulo-2
+    docker run --rm kubernetescourse/slides-docker
   ```
 * Abre una nueva consola y ejecuta `docker container ls`. Deberías ver el contenedor en el listado.
 * Vuelve a la consola y para el contenedor pulsando CTRL+c o CMD+c
@@ -69,7 +69,7 @@ Siguiendo la recomendación que hacen en el blog, nosotros usaremos la nueva nom
 
 * Levanta de nuevo el contenedor de las diapositivas **pero esta vez sin la opción `--rm`**
   ```bash
-    docker run becorecode/curso-intro-docker-modulo-2
+    docker run kubernetescourse/slides-docker
   ```
 * Páralo con CTRL+c o CMD+c
 * Levántalo y páralo dos o tres veces más

@@ -1,7 +1,7 @@
 ### Crear un contenedor
 
 ```bash
-docker run becorecode/curso-intro-docker-modulo-2
+docker run kubernetescourse/slides-docker
 ```
 
 * Este comando crea (y ejecuta) un contenedor 
@@ -28,7 +28,7 @@ revisarlo y entenderlo por vosotros mismos.
 ...`docker run` tiene truco **en realidad se están ejecutando dos comandos:**
 
 ```bash
-> docker create becorecode/curso-intro-docker-modulo-2
+> docker create kubernetescourse/slides-docker
 4c1253a2ec05ea37a296ac2761d83661cb15b81171aa99c0114d9cc0acf38d1c
 
 > docker start 4c1253a2ec05ea37a296ac2761d83661cb15b81171aa99c0114d9cc0acf38d1c

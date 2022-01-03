@@ -3,7 +3,7 @@
 Para poder ver las diapositivas necesitamos utilizar la opción `-p` del comando
 
 ```bash
-> docker container create --rm -p "8002:8002" becorecode/curso-intro-docker-modulo-2
+> docker container create --rm -p "8002:8002" kubernetescourse/slides-docker
 THE_CONTAINER_ID
 
 > docker container start THE_CONTAINER_ID
@@ -29,7 +29,7 @@ notes:
 Para levantar el contenedor usando `docker run`:
 
 ```bash
-> docker run --rm -p "8002:8002" becorecode/curso-intro-docker-modulo-2
+> docker run --rm -p "8002:8002" kubernetescourse/slides-docker
 ```
 
 Para conseguir el ID del contenedor, usaríamos el comando `docker container ls`

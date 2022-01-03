@@ -19,8 +19,8 @@ el enlace a ambas.
 * Listar el contenido de la carpeta `slides`
 
 ```bash
-  > docker run --rm -p "8002:8002" --name modulo2 becorecode/curso-intro-docker-modulo-2
-  > docker exec modulo2 ls
+  > docker run --rm -p "8002:8002" --name docker-slides kubernetescourse/slides-docker
+  > docker exec docker-slides ls
   Dockerfile
   LICENSE
   README.md
@@ -49,18 +49,18 @@ notes:
 Usando los siguientes comandos podemos dar respuesta a estas preguntas:
 
 ```bash
-> docker exec modulo2 pwd
+> docker exec docker-slides pwd
 ```
  nos muestra que la carpeta es `/home/node`
 
 ```bash
-> docker exec modulo2 ps -uxa
+> docker exec docker-slides ps -uxa
 ```
 nos muestra que el usuario es `node`. También podríamos obtener esta información mirando el fichero `Dockerfile`, aunque esto lo veremos más adelante en el curso.
 
 El siguiente comando nos permite ejecutar una shell:
 ```bash
-> docker exec modulo2 bash
+> docker exec docker-slides bash
 ```
 
 ^^^^^^
@@ -86,7 +86,7 @@ El siguiente comando nos permite ejecutar una shell:
 * Vuelve a levantar el contenedor si por un casual lo has parado:
 
 ```bash
-  > docker run --rm -p "8002:8002" --name modulo2 becorecode/curso-intro-docker-modulo-2
+  > docker run --rm -p "8002:8002" --name docker-slides kubernetescourse/slides-docker
 ```
 
 * 🤯 Intenta borrar todos los ficheros del contenedor: `rm -r /`
@@ -98,7 +98,7 @@ El siguiente comando nos permite ejecutar una shell:
 
 ### Práctica: hagamos el cabra 🐐🐐
 * Si detienes el contenedor con `docker container stop` y lo vuelves a levantar con `docker container start` ¿estarán los ficheros dentro?
-* Si borras el contenedor con `docker container rm` y creas uno nuevo con el mismo nombre (modulo2) ¿estárán los ficheros dentro?
+* Si borras el contenedor con `docker container rm` y creas uno nuevo con el mismo nombre (`docker-slides`) ¿estárán los ficheros dentro?
 
 Pruebalo y verifica si tus respuestas son correctas
 

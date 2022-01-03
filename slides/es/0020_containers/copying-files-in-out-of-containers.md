@@ -39,7 +39,7 @@ Editamos la diapositiva `slides/toc.md` y añadimos un texto al principio de la 
 Levantar el contenedor:
 
 ```bash
-> docker run --rm -p "8002:8002" --name modulo2 becorecode/curso-intro-docker-modulo-2
+> docker run --rm -p "8002:8002" --name docker-slides kubernetescourse/slides-docker
 ```
 
 Abrir el navegador y confirmar que nuestros cambios se ven en las diapositivas.

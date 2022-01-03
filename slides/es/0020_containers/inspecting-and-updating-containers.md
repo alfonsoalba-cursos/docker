@@ -13,7 +13,7 @@ El comando [`docker container inspect`]() nos da información detallada de un co
 * Crea el contenedor correspondiente a este módulo del curso (si no lo has creado)
 
 ```bash
-> docker container run --rm --name modulo2 -d becorecode/curso-intro-docker-modulo-2
+> docker container run --rm --name docker-slides -d kubernetescourse/slides-docker
 ```
 
 * Muesta toda la información del contenedor usando 
@@ -27,7 +27,7 @@ notes:
 Al ejecutar el comando [`docker container inpect`](https://docs.docker.com/engine/reference/commandline/container_inspect/)
 
 ```bash
-> docker container stats modulo2
+> docker container stats docker-slides
 
 
 [
@@ -59,7 +59,7 @@ Al ejecutar el comando [`docker container inpect`](https://docs.docker.com/engin
         "HostnamePath": "/var/lib/docker/containers/3d7388b598a29079acf363775db061489099e0dc0d954c56ad8e08edf121515f/hostname",
         "HostsPath": "/var/lib/docker/containers/3d7388b598a29079acf363775db061489099e0dc0d954c56ad8e08edf121515f/hosts",
         "LogPath": "/var/lib/docker/containers/3d7388b598a29079acf363775db061489099e0dc0d954c56ad8e08edf121515f/3d7388b598a29079acf363775db061489099e0dc0d954c56ad8e08edf121515f-json.log",
-        "Name": "/modulo2",
+        "Name": "/docker-slides",
         "RestartCount": 0,
         "Driver": "overlay2",
         "Platform": "linux",
@@ -196,7 +196,7 @@ Al ejecutar el comando [`docker container inpect`](https://docs.docker.com/engin
                 "--",
                 "--port=${APP_PORT}"
             ],
-            "Image": "becorecode/curso-intro-docker-modulo-2",
+            "Image": "kubernetescourse/slides-docker",
             "Volumes": null,
             "WorkingDir": "/home/node",
             "Entrypoint": [
@@ -278,7 +278,7 @@ De toda la información que nos da el comando `docker container inspect`, voy a 
 * Levantamos el contenedor si no lo tenemos levantado **sin usar la opción `--rm`**
 
 ```bash
-> docker container run --name modulo2 -p "8002:8002" -d becorecode/curso-intro-docker-modulo-2
+> docker container run --name docker-slides -p "8002:8002" -d kubernetescourse/slides-docker
 ```
 
 ^^^^^^
@@ -288,12 +288,12 @@ De toda la información que nos da el comando `docker container inspect`, voy a 
 * Vemos cuánta memoria consume el contenedor
 
 ```bash
-> docker container stats modulo2
+> docker container stats docker-slides
 
-CONTAINER ID  NAME     CPU %  MEM USAGE / LIMIT     MEM %   NET I/O     BLOCK I/O   PIDS
-3d7388b598a2  modulo2  1.71%  89.73MiB / 8.752GiB   1.00%   1.68kB / 0B 0B / 4.1kB  22
+CONTAINER ID  NAME           CPU %  MEM USAGE / LIMIT     MEM %   NET I/O     BLOCK I/O   PIDS
+3d7388b598a2  docker-slides  1.71%  6.848MiB / 8.752GiB   1.00%   1.68kB / 0B 0B / 4.1kB  22
 ```
- * Vemos que este contenedor consume unos 90MiB de memoria
+ * Vemos que este contenedor consume unos 7MiB de memoria
 
 ^^^^^^
 
@@ -302,25 +302,30 @@ CONTAINER ID  NAME     CPU %  MEM USAGE / LIMIT     MEM %   NET I/O     BLOCK I/
 * Paramos el contenedor
 
 ```bash
-> docker container stop modulo2
+> docker container stop docker-slides
 ```
 
-* Limitamos la memoria del contenedor a unos 50MiB
+* Limitamos la memoria del contenedor a 6MiB (el mínimo valor permitido por docker)
 
 ```bash
-> docker container update --memory 524288000 --memory-swap 0 modulo2
+> docker container update --memory 6291456 --memory-swap 6291456 docker-slides
 ```
 
 * Intentar iniciar el contenedor
 
 ```bash
-> docker container start modulo2
-> docker container list
+> docker container start docker-slides
+Error response from daemon: cannot start a stopped process: unknown
+Error: failed to start containers: docker-slides
 ```
 
-* ...el contenedor no está porque no tiene memoria para ejecutarse
+* ...el contenedor no se puede levantar porque no tiene memoria para ejecutarse
 
 notes:
+
+En el comando que hemos ejecutado, hemos puesto el mismo valor para `--memory`
+y para `--memory-swap`. Esto hace que no se pueda usar la swap (más
+información [aquí](https://docs.docker.com/config/containers/resource_constraints/#--memory-swap-details))
 
 Para ver que el motivo por el que el contenedor no se ha ejecutado, debemos mirar el log de `dockerd`.
 
@@ -332,6 +337,7 @@ En OSX, yo uso el siguiente comando:
 log stream --predicate 'eventMessage contains "docker"'
 ```
 
+En Windows, están en la carpeta `AppData\Roaming\Docker\log\vm\`
 
 Observaremos un error parecido al siguiente:
 
