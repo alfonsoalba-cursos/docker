@@ -74,7 +74,7 @@ Usage: ruby [switches] [--] [programfile] [arguments]
 ```
 
 En las primeras líneas de la salida del comando vemos cómo docker, que no tiene la 
-imagen descargada en local, la descarga. Una vez descargada la image, crea el contenedor
+imagen descargada en local, la descarga. Una vez descargada la imagen, crea el contenedor
 y ejecuta el comando `ruby -h`
 
 Vamos a ejecutar el script:
