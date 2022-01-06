@@ -5,7 +5,7 @@ Todos los comandos están ejecutados utilizando esta carpeta como ruta de trabaj
 ## Objetivo
 
 Sin instalar el lenguaje de programación [`ruby`](https://www.ruby-lang.org/en/), queremos ejecutar
-un pequeño script ejecutando este lenguaje.
+un pequeño script de una línea usando este lenguaje.
 
 ## La imagen de `ruby`
 
