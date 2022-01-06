@@ -27,9 +27,9 @@ ejecutar el código que está contenido en la imagen.
 * Vamos a levantar varias instancias del mismo objeto
 
 ```bash
-> docker run --rm -p "9003:8003" -d --name instancia1 becorecode/curso-intro-docker-modulo-3
-> docker run --rm -p "9004:8003" -d --name instancia2 becorecode/curso-intro-docker-modulo-3
-> docker run --rm -p "9005:8003" -d --name instancia3 becorecode/curso-intro-docker-modulo-3
+> docker run --rm -p "9003:8003" -d --name instancia1 kubernetescourse/slides-docker
+> docker run --rm -p "9004:8003" -d --name instancia2 kubernetescourse/slides-docker
+> docker run --rm -p "9005:8003" -d --name instancia3 kubernetescourse/slides-docker
 ````
 
 notes:
@@ -40,7 +40,7 @@ Prestad atención a la opción -p de cada comando. Si intentamos levantar los tr
 del host (9003) la segunda vez que ejecutemos el comando nos dará un error diciéndonos que ese puerto ya está ocupado:
 
 ```bash
-> docker run --rm -p "9004:8003" -d --name instancia2 becorecode/curso-intro-docker-modulo-3
+> docker run --rm -p "9004:8003" -d --name instancia2 kubernetescourse/slides-docker
 
 docker: Error response from daemon: driver failed programming external connectivity on endpoint instancia2
 (7c1ea225545c23385619e7e9c3022d4607b11d22a8c5d18cb1f0cd589dd6db31): Bind for 0.0.0.0:9003 failed: port is already allocated.
@@ -95,21 +95,9 @@ En un fichero que se llama "Dockerfile"
 
 ```Dockerfile
 # instrucciones (imagen) para crear el contenedor de este módulo del curso
-FROM node:10-alpine
+FROM nginx:latest
 
-ENV APP_PATH=/home/node
-ENV APP_PORT=8003
-USER node
-
-WORKDIR $APP_PATH
-
-COPY --chown=node . $APP_PATH
-
-RUN npm install
-
-EXPOSE $APP_PORT
-
-CMD ["npm", "start", "--", "--port=${APP_PORT}"]
+COPY . /usr/share/nginx/html/
 ```
 
 notes:
@@ -118,23 +106,23 @@ La sintaxis de este fichero la veremos en detalle en el siguiente módulo.
 
 Este fichero lo que dice es más o menos lo siguiente:
 
-1. `FROM node:10-alpine` Partiendo de la imagen de node, versión 10
-2. Haz varias cosas (que veremos el siguiente módulo del curso...)
+1. `FROM nginx:latest` Partiendo de la imagen de nginx, última versión
+2. Copia todos los ficheros a la carpeta /usr/share/ninx/html/ dentro de la imagen
 
 ^^^^^^
 
-### ¿Y como se crea la imagen de node?
+### ¿Y como se crea la imagen de nginx:latest?
 
-[Ver Dockerfile para node:alpine](https://github.com/nodejs/docker-node/blob/master/Dockerfile-alpine.template)
+[Ver Dockerfile para nginx:latest](https://github.com/nginxinc/docker-nginx/blob/3a7105159a6c743188cb1c61e4186a9a59c025db/mainline/debian/Dockerfile)
 
-[Ver Dockerfile para alpine:0.0](https://github.com/alpinelinux/docker-alpine/blob/master/Dockerfile)<!-- .element: class="fragment"  data-fragment-index="1"-->
+[Ver Dockerfile para debian:bullseye-slim](https://github.com/debuerreotype/docker-debian-artifacts/blob/d5eb7c589d016973bce6f3e1827b5c315b7cefbc/bullseye/slim/Dockerfile)<!-- .element: class="fragment"  data-fragment-index="1"-->
 
 
 ```bash
-# Dockerfile para crear la imagen de Alpine Linux
+# Dockerfile para crear la imagen de Debian
 FROM scratch
-ADD alpine-minirootfs-20190925-x86_64.tar.gz /
-CMD ["/bin/sh"]
+ADD rootfs.tar.xz /
+CMD ["bash"]
 ```
 <!-- .element: class="fragment"  data-fragment-index="2"-->
 
@@ -142,17 +130,17 @@ CMD ["/bin/sh"]
 
 notes:
 
-Para crear la imagen de node, hemos seguido esta ruta:
+Para crear la imagen de las diapositivas, hemos seguido esta ruta:
 
-```scratch -> alpine -> node -> Código de las diapositivas```
+```scratch -> debian -> nginx -> Código de las diapositivas```
 
 Si cada vez que tenemos que crear la imagen, tenemos que seguir todos los pasos, pues vamos a tardar un rato en hacerlo.
 
-¿Que hace docker para resolver el problema? Crear un sistema de cache
+¿Qué hace docker para resolver el problema? Crear un sistema de cache
 
 ^^^^^^
 
-### ¿Y como se crea la imagen de node?
+### ¿Y como se crea la imagen de nginx?
 
 * Para evitar tener que crear uno a uno todos los pasos cada vez que creamos una 
   imagen <br> **se ha desarrollado un sistema de cache basado en capas (layers)**
@@ -164,43 +152,41 @@ Si cada vez que tenemos que crear la imagen, tenemos que seguir todos los pasos,
 Vamos a descargar la imagen de Ubuntu:
 
 
-
-```bash
-> docker image pull ubuntu
+```bash [4]
+$ docker image pull ubuntu
 Using default tag: latest
 latest: Pulling from library/ubuntu
-5667fdb72017: Pull complete
-d83811f270d5: Pull complete
-ee671aafb583: Pull complete
-7fc152dfb3a6: Pull complete
+7b1a6ab2e44d: Pull complete
+Digest: sha256:626ffe58f6e7566e00254b638eb7e0f3b11d4da9675088f4781a50ae288f3322
+Status: Downloaded newer image for ubuntu:latest
+docker.io/library/ubuntu:latest
 ```
 
-Se descarga cuatro capas
+Se descarga una sola capa
 
 ^^^^^^
 
 ### Capas (Layers)
 
 ```bash
-> docker image history ubuntu
-IMAGE               CREATED             CREATED BY                                      SIZE
-2ca708c1c9cc        2 weeks ago         /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
-<missing>           2 weeks ago         /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B
-<missing>           2 weeks ago         /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   745B
-<missing>           2 weeks ago         /bin/sh -c [ -z "$(apt-get indextargets)" ]     987kB
-<missing>           2 weeks ago         /bin/sh -c #(nop) ADD file:288ac0434f65264f3…   63.2MB
+$ docker image history ubuntu
+IMAGE          CREATED        CREATED BY                                      SIZE      COMMENT
+ba6acccedd29   2 months ago   /bin/sh -c #(nop)  CMD ["bash"]                 0B
+<missing>      2 months ago   /bin/sh -c #(nop) ADD file:5d68d27cc15a80653…   72.8MB
 ```
 
 notes:
 
-En esta diapositiva, vemos que la imagen de ubuntu tiene cuatro capas, que se corresponden con los comandos necesarios
+En esta diapositiva, vemos que la imagen de ubuntu tiene dos capas, que se corresponden con los comandos necesarios
 para crear la imagen. En la diapositiva anterior, cuando nos descargamos la imagen de ubuntu 
-**nos descargamos cuatro capas precisamente**.
+**nos descargamos una sola capa**.
 
-Si os fijáis, el último comando no genera una capa adicional porque tiene 0Bytes, por eso
-sólo se generan cuatro capas.
+Si os fijáis, el último comando no genera una capa adicional porque tiene 0Bytes (son
+capas que sólo añaden metadatos a la imagen y que no generan una nueva capa física
+descargable), por eso sólo nos descargamos una capa.
 
-Si ahora construimos algo encima de la imagen de ubuntu, nos tendremos que descargar las cuatro capas de ubuntu más las 
+Si ahora construimos algo encima de la imagen de ubuntu, nos tendremos que descargar todas las 
+capas de ubuntu (en este caso, sólo una) más las 
 capas de lo que vayamos a construir.
 
 ^^^^^^ 
@@ -212,8 +198,8 @@ Veamos un ejemplo de cómo funcionan el cacheado de capas:
 ```bash 
 > docker image pull debian:stretch-slim
 stretch-slim: Pulling from library/debian
-8f91359f1fff: Pull complete
-Digest: sha256:8ef99f5a3e800df50ea02334d233360d26c414208815686fbcbf34648ec596d4
+35b2232c987e: Pull complete
+Digest: sha256:5913f0038562c1964c62fc1a9fcfff3c7bb340e2f5dbf461610ab4f802368eee
 Status: Downloaded newer image for debian:stretch-slim
 docker.io/library/debian:stretch-slim
 ```
@@ -230,23 +216,22 @@ como _image flattering_ y no me sirve como ejemplo. Veremos qué es esto de _ima
 
 Ahora vamos a descargarnos la imagen de Postgres11:
 
-```bash
+```bash [3]
 > docker image pull postgres:11
 11: Pulling from library/postgres 
-8f91359f1fff: Already exists <----- ¡¡¡ESTA CAPA YA LA TIENE!!!
-c6115f5efcde: Downloading [====>                                              ]  441.5kB/4.501MB
-28a9c19d8188: Download complete
-2da4beb7be31: Download complete
-fb9ca792da89: Waiting
-cedc20991511: Waiting
-b866c2f2559e: Waiting
-5d459cf6645c: Waiting
-fe547ab13055: Waiting
-1ec7153c8a1e: Waiting
-04f5c9a661a4: Waiting
-2fa57c35e01c: Waiting
-ecf80d85543f: Waiting
-a367f7a702e8: Waiting
+35b2232c987e: Already exists <----- ¡¡¡ESTA CAPA YA LA TIENE!!!
+c03727fea36b: Pull complete 
+40c6d8e16779: Pull complete
+c2ef16a628a4: Pull complete
+e74a9f29f468: Pull complete
+433f4ea81bed: Pull complete
+0e16d29f73c0: Pull complete
+0dcac015b659: Pull complete
+e2e8de9996da: Downloading [======================================>            ]  54.71MB/71.52MB
+58e7858fb26e: Download complete
+2b30b3b45bf0: Download complete
+6b863d1914b8: Download complete
+6112fcb67f21: Download complete
 ```
 
 notes:

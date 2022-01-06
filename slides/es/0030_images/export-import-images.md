@@ -13,7 +13,7 @@ Los comandos para importar y exportar imágenes son
 `docker container export` exporta el contenido completo de un contenedor a un fichero `.tar`
 
 ```bash
-> docker create modulo3 becorecode/curso-intro-docker-modulo-3
+> docker create modulo3 kubernetescourse/slides-docker
 > docker container export modulo3 > backup_modulo3.tar
 ```
 
@@ -23,13 +23,27 @@ Los comandos para importar y exportar imágenes son
 
 `docker import` importa un fichero `.tar`y crear una imagen de docker a partir de él:
 
-Si intentamos importar la imagen anterior:
+Importamos la imagen anterior:
 
 ```bash
-> docker import backup_modulo3.tar becorecode/curso-intro-docker-modulo-3:restored
-> docker run --rm becorecode/curso-intro-docker-modulo-3:restored
+$ docker import backup_modulo3.tar kubernetescourse/slides-docker:restored
+sha256:c51570a0b2d342d6f57047e51c556703314ec31578656892e747ee2173c46ffb
+
+$ docker image ls
+REPOSITORY                                  TAG               IMAGE ID       CREATED              SIZE
+kubernetescourse/slides-docker              restored          c51570a0b2d3   About a minute ago   151MB
+```
+
+^^^^^^
+
+### Importación 
+
+Intentamos levantar un contenedor con la imagen que acabamos de importar:
+
+```shell
+$ docker container run --rm -p "8079:80" kubernetescourse/slides-docker:restored
 docker: Error response from daemon: No command specified.
-See 'docker run --help'
+See 'docker run --help'.
 ```
 
 ^^^^^^
@@ -40,11 +54,10 @@ See 'docker run --help'
 ...si inspeccionamos ambas imágenes
 
 ```bash
-> docker image inspect -f '{{.ContainerConfig.Cmd}}' becorecode/curso-intro-docker-modulo-3:restored
+$ docker image inspect -f '{{.Config.Cmd}}' kubernetescourse/slides-docker:restored
 []
-
-> docker image inspect -f '{{.ContainerConfig.Cmd}}' becorecode/curso-intro-docker-modulo-3:latest
-[/bin/sh -c #(nop)  CMD ["npm" "start" "--" "--port=${APP_PORT}"]]
+$ docker image inspect -f '{{.Config.Cmd}}' kubernetescourse/slides-docker:latest
+[nginx -g daemon off;]
 ```
 
 ^^^^^^
@@ -52,8 +65,7 @@ See 'docker run --help'
 
 Al exportar el contenedor perdemos parte de la información de la imagen que se utilizó para levantarlo
 
-**Sólo exportamos el contenido
-del contenedor**
+**Sólo exportamos el contenido del contenedor**
 
 ^^^^^^
 ### 💻 Ejercicio 💻
@@ -65,11 +77,9 @@ notes:
 La respuesta es
 
 ```bash
-docker run -p '10003:8003' \ 
+docker run -p '10003:80' \ 
        --name modulo3_restored \ 
-       --user node \
-       -w '/home/node' \
-       becorecode/curso-intro-docker-modulo-3:restored npm start -- --port=8003
+       kubernetescourse/slides-docker:restored nginx -g "daemon off;"
 ```
 
 ^^^^^^

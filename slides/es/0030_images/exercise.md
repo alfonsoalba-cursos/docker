@@ -46,23 +46,19 @@ intentas levantar la aplicación, **no podrás acceder desde el host**
 Veamos un ejemplo:
 
 ```bash
-> docker run --rm -p "8005:8005" -ti becorecode/curso-intro-docker-modulo-5 sh
+> docker run --rm -p "8080:80" -ti kubernetescourse/slides-docker sh
 ~ $
 ```
 
-Si intentamos acceder al puerto 8005 del host nos dirá que la página no existe.
+Si intentamos acceder al puerto 8080 del host nos dirá que la página no existe.
 
-Si ahora dentro de la shell, levantamos el servicio en el puerto 8005:
+Si ahora dentro de la shell, levantamos el servicio en el puerto 80:
 
 ```bash
-~ $ npm start -- --port=8005
+~ $ nginx -g "daemon off;"
 ```
 
-y recargamos la página http://localhost:8005 en el host, sí que veremos las diapositivas.
+y recargamos la página http://localhost:8080 en el host, sí que veremos las diapositivas.
 
 En la realización del ejercicio, tendrás que hacer algo parecido para ver la app 
 en rails.
-
-
-
-

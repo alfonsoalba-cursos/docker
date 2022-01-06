@@ -38,11 +38,6 @@ Este comando busca por defecto en [Docker Hub](https://hub.docker.com)
 
 Una imagen que está conectada a un repositorio y que se construye automáticamente en base a unas reglas
 
-notes:
-
-Se supone que las imágenes de becorecode están automatizadas y sin embargo al buscarlas, los resultados de búsqueda
-pone que no lo están 🤷
-
 ^^^^^^
 
 ### Buscar imágenes instaladas
@@ -59,10 +54,10 @@ Si lo que queremos el buscar imágenes entre las que tenemos instaladas, el coma
 
 ### 💻 Práctica 💻
 
-Listar todas las imágenes que tenemos instaladas de `becorecode`
+Listar todas las imágenes que tenemos instaladas de `kubernetescourse`
 
 ```bash
-> docker image ls "becorecode/*"
+> docker image ls "kubernetescourses/*"
 ```
 
 ^^^^^^
@@ -71,9 +66,9 @@ Listar todas las imágenes que tenemos instaladas de `becorecode`
 
 * Filtros que acepta el comando `docker image ls --filter`:
   * `dangling` (true or false) Imagen sin etiqueta
-  * `label` (label=<key> o label=<key>=<value>)
-  * `before` (<image-name>[:<tag>], <image id> or <image@digest>) imágenes creadas antes de la imagen con id o referencia
-  * `since` (<image-name>[:<tag>], <image id> or <image@digest>) imágenes creadas después de la imagen con id o referencia
+  * `label` (label=\<key\> o label=\<key\>=\<value\>)
+  * `before` (\<image-name\>[:\<tag\>], \<image id\> or <image@digest>) imágenes creadas antes de la imagen con id o referencia
+  * `since` (\<image-name\>[:\<tag\>], \<image id\> or <image@digest>) imágenes creadas después de la imagen con id o referencia
   * `reference` (patrón o referencia) imágenes cuyo tag cumple el patrón o tiene el tag indicado
 
 
@@ -87,9 +82,9 @@ Listar todas las imágenes que tenemos instaladas de `becorecode`
 > docker image ls --filter 'reference=*:latest'
 ```
 
-* Mostrar las imágenes con el tag `latest` dentro de becorecode
+* Mostrar las imágenes con el tag `latest` dentro de `kubernetescourse`
 ```bash
-> docker image ls --filter 'reference=becorecode/*:latest'
+> docker image ls --filter 'reference=kubernetescourse/*:latest'
 ```
 
 notes:
@@ -98,6 +93,6 @@ Aparte del uso de `--filter` para filtrar, siempre tenéis la opción de utiliza
 y apollaros en comandos como `grep`: 
 
 ```bash
-> docker image ls | grep becorecode |grep latest
+> docker image ls | grep kubernetescourse |grep latest
 ```
 

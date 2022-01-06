@@ -13,7 +13,7 @@ Los comandos para guardar y cargar imágenes son:
 El comando `docker image save` guarda una imagen a un archivo tar:
 
 ```bash
-> docker save becorecode/curso-intro-docker-modulo-3 > modulo3_saved.tar
+> docker save kubernetescourse/slides-docker > modulo3_saved.tar
 ```
 
 ^^^^^^
@@ -24,12 +24,12 @@ Este fichero `.tar` generado por `docker image save` puede luego utilizarse para
 crear una nueva imagen usando `docker image load`:
 
 ```bash
-> docker image ls -f 'reference=becorecode/*'
+> docker image ls -f 'reference=kubernetescourse/*'
 # Borramos la imagen
-> docker image rm becorecode/curso-intro-docker-modulo-3
+> docker image rm kubernetescourse/slides-docker
 # La volvemos a cargar del fichero .tar
 > docker image load < modulo3_saved.tar
-> docker image ls -f 'reference=becorecode/*'
+> docker image ls -f 'reference=kubernetescourse/*'
 ```
 
 notes:
@@ -50,7 +50,7 @@ Para ilustrar cómo funciona `docker image ls` hacemos lo siguiente
 * La imagen que guardamos contiene toda la información de la imagen, puertos, comando de
   ejecución, etc.
 * Si ejecutamos un contenedor con la imagen guardada, no hace falta escribir todas las opciones de
-  nuevo como cuando la exportamos. Estas opciones guardan junto con la imagen al hacer `docker save`
+  nuevo como cuando la exportamos. Estas opciones se guardan junto con la imagen al hacer `docker save`
 
 ^^^^^^
 
