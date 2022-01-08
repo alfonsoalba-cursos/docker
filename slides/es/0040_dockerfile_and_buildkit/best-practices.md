@@ -2,8 +2,8 @@
 
 notes:
 
-Docker [dispone de una página en su documentación] en la que nos da una serie
-de pautas y buenas prácticas para crear imágenes.
+Docker [dispone de una página en su documentación](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) 
+en la que nos da una serie de pautas y buenas prácticas para crear imágenes.
 
 Revisaremos en las siguientes diapositivas los consejos más importantes.
 
