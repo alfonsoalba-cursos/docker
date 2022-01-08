@@ -39,38 +39,3 @@ echo $HOME
   windows):
   * Usando la instrucción `SHELL`
   * Usando `RUN ["/bin/bash", "command"]`
-
-^^^^^^
-
-### 💻️ Ejercicio ️️💻️
-
-* En el módulo anterior, creamos un contenedor con nuestra aplicación en rails ¿te acuerdas?
-* Si quisiese crear una app en rails nueva ¿qué tendrías que hacer?
-* Crea un `Dockerfile` para evitarlo
-
-notes:
-
-Pues básicamente, cada vez que quieras crear una app en rails, tienes que hacer los mismos pasos:
-
-* Crear un contenedor basado en ruby
-
-```bash
-> docker run --name my_rails_app ruby bash
-```
-
-* Instalar rails
-
-```bash
-> root 167ab4cd> gem install rails
-```
-
-Crea una image para evitar tener que hacer esto cada vez.
-
-^^^^^^
-
-### 💻️ Ejercicio (extra) ️️💻️
-
-* Sube tu `Dockerfile` a un repositorio en github
-* Crea un repositorio en Docker Hub y conectalo con github
-* Verifica que al hacer push al repositorio en github, tu imagen se actualiza
-  en Docker Hub

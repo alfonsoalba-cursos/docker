@@ -138,7 +138,13 @@ y podríamos hacer cosas como `CMD ls $HOME`.
 La consecuencia de usar _shell_ es que el proceso 1 de nuestro contenedor no será 
 el comando sino la shell, como vimos en la diapositiva anterior
 
-Cuando mandamos señales al contenedor, será la shell quién las reciba, no el contenedor.
+Cuando mandamos señales al contenedor, será la shell quién las reciba, no nuestro proceso.
+
+notes:
+
+Siguiendo con el ejemplo anterior, para que sea el proceso `nginx` el que recibe
+las señales que se envían al contenedor, deberemos usar _EXEC_. En caso contrario,
+será bash quién las reciba.
 
 ^^^^^^
 
@@ -149,7 +155,7 @@ Docker recomienda en su documentación el uso de _exec_
 notes:
 
 Cuando se usa _exec_, los parámetros se parsean como un array JSON. Eso significa
-que los elementos del array deberán is entre comillas dobles:
+que los elementos del array deberán ir entre comillas dobles:
 
 
 ```Dockerfile
