@@ -2,17 +2,17 @@
 
 #### Construcción de imágenes (Dockerfile)
 
-* [Nuestra primera imagen](#/our-first-image)
-* [la caché](/#build-cache)
-* [`buildx`](#buildx)
-* [_parser directives_](#/parser-directives)
-* [ENTRYPOINT vs CMD](#/entrypoint-vs-cmd)
-* [Instrucciones en el Dockerfile](#/dockerfile-instructions)   
-* [Ejecutando comandos](#/running-commands)
-* [Añadiendo ficheros a nuestra imagen](/#copy-files)
-* [_Secrets_](#/secrets)
-* [Buenas prácticas](/#best-practices)
-* [Ejercicio](/#exercise)
+* [Nuestra primera imagen](#our-first-image)
+* [la caché](#build-cache)
+* [`buildx`](#buildx
+* [_parser directives_](#parser-directives)
+* [ENTRYPOINT vs CMD](#entrypoint-vs-cmd)
+* [Instrucciones en el Dockerfile](#dockerfile-instructions)   
+* [Ejecutando comandos](#running-commands)
+* [Añadiendo ficheros a nuestra imagen](#copy-files)
+* [_Secrets_](#secrets)
+* [Buenas prácticas](#best-practices)
+* [Ejercicio](#exercise)
 
 notes:
 
