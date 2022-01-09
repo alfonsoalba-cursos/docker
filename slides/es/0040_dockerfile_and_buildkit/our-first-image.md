@@ -81,10 +81,11 @@ Enlaces para profundizar:
 
 ### 💻️Práctica 💻️
 
-* Construimos la imagen
+Construimos la imagen
 
-```
+```shell
 > DOCKER_BUILDKIT=1 docker build --progress=plain -t="kubernetescourse/static_web:v1" .
+asdf    asdf    asdfas d
 ```
 
 notes:
@@ -105,20 +106,20 @@ La opción `-t` añade un tag a la imagen. Si no se pone ningún tagname (en nue
 Como véis, estamos ya poniendo el repositorio de Docker Hub donde vamos a subir la imagen.
 Recordad cómo subimos las imágenes a Docker Hub en el módulo 3 usando el comando
 
-```bash
+```shell
 > docker push [repository]/[name]:[tag]
 ```
 
 ^^^^^^
 
-
 ### 💻️Práctica 💻️
  
 * Podemos ver la imagen que acabamos de construir
 
- ```shell
-$ docker image ls --filter 'reference=kubernetescourse/*:v1'
- ```
+```shell
+> docker image ls --filter 'reference=kubernetescourse/*:v1'
+asdf    asdf    asdfas d
+```
 
 * Veamos las capas que contiene nuestra imagen:
 
@@ -161,30 +162,140 @@ Porque necesitamos que nginx se ejecute en primer plano y sea el proceso 1 del c
 
 ### Dockerfile
 
-* [syntax=docker/dockerfile:1])(https://docs.docker.com/engine/reference/builder/#syntax)
-  Utilizar la última versión de la rama 1 de la definición del fichero Dockerfile (1.3.1)
-* [`LABEL maintainer="hola@becorecode.com"`](https://docs.docker.com/engine/reference/builder/#label) es el sustituto a la antigua instrucción 
-  [`MAINTAINER`](https://docs.docker.com/engine/reference/builder/#maintainer) 
-  Damos información sobre cómo contactar con nosotros por email
-* [`RUN apt-get update; apt-get install -y nginx`](https://docs.docker.com/engine/reference/builder/#run) 
-  Instalamos nginx
-* [`RUN echo '¡Hola! Soy el contenedor de Alfonso' >/var/www/html/index.html`]((https://docs.docker.com/engine/reference/builder/#run)) Contenido de la web
-* [`EXPOSE 80`](https://docs.docker.com/engine/reference/builder/#expose) Exponemos el puerto 80
+```Dockerfile [1]
+# syntax=docker/dockerfile:1
+FROM ubuntu:latest
+LABEL maintainer="alfonso@alfonsoalba.com"
+RUN apt-get update; apt-get install -y nginx
+RUN echo '¡Hola! Soy el contenedor de Alfonso' \
+    >/var/www/html/index.html
+EXPOSE 80
+```
+
+[syntax=docker/dockerfile:1](https://docs.docker.com/engine/reference/builder/#syntax)
+
+Utilizar la última versión de la rama 1 de la definición del fichero Dockerfile (1.2.1)
 
 notes:
 
-* En el momento de redacción de esta sección, la última version del _frontend_
-  de Dockerfile es la 1.3.1 (https://hub.docker.com/r/docker/dockerfile)
-* La instrucción LABEL nos permite añadir metadatos a las imágenes. Estos
-  metadatos podemos luego usarlos para buscar imágenes
-```bash
-> docker image ls -f 'label=maintainer=hola@becorecode.com'
+En el momento de redacción de esta sección, la última version estable del _frontend_ 
+de Dockerfile es la 1.2.1 (https://hub.docker.com/r/docker/dockerfile)
+
+^^^^^^
+
+### Dockerfile
+
+```Dockerfile [2]
+# syntax=docker/dockerfile:1
+FROM ubuntu:latest
+LABEL maintainer="alfonso@alfonsoalba.com"
+RUN apt-get update; apt-get install -y nginx
+RUN echo '¡Hola! Soy el contenedor de Alfonso' \
+    >/var/www/html/index.html
+EXPOSE 80
 ```
 
-* La instrucción RUN hace lo siguiente:
+[`FROM`](https://docs.docker.com/engine/reference/builder/#from)
+
+Partimos de la última versión de la imagen de Ubuntu
+
+
+^^^^^^
+
+### Dockerfile
+
+```Dockerfile [3]
+# syntax=docker/dockerfile:1
+FROM ubuntu:latest
+LABEL maintainer="alfonso@alfonsoalba.com"
+RUN apt-get update; apt-get install -y nginx
+RUN echo '¡Hola! Soy el contenedor de Alfonso' \
+    >/var/www/html/index.html
+EXPOSE 80
+```
+
+[`LABEL`](https://docs.docker.com/engine/reference/builder/#label) 
+
+es el sustituto a la antigua instrucción 
+[`MAINTAINER`](https://docs.docker.com/engine/reference/builder/#maintainer)
+
+Damos información sobre cómo contactar con nosotros por email
+
+notes:
+
+La instrucción `LABEL` nos permite añadir metadatos a las imágenes. Estos
+  metadatos podemos luego usarlos para buscar imágenes
+```bash
+> docker image ls -f 'label=maintainer=alfonso@alfonsoalba.com'
+```
+
+Podemos añadir las etiquetas que queramos a nuestra imagen
+
+
+^^^^^^
+
+### Dockerfile
+
+```Dockerfile [4]
+# syntax=docker/dockerfile:1
+FROM ubuntu:latest
+LABEL maintainer="alfonso@alfonsoalba.com"
+RUN apt-get update; apt-get install -y nginx
+RUN echo '¡Hola! Soy el contenedor de Alfonso' \
+    >/var/www/html/index.html
+EXPOSE 80
+```
+
+[`RUN`](https://docs.docker.com/engine/reference/builder/#run) 
+
+Instalamos nginx
+
+notes:
+
+La instrucción `RUN` hace lo siguiente:
   * ejecuta el comando que se pasa como argumento en una nueva capa sobre la última imagen
   * hace commit de una nueva imagen
-* La instrucción `EXPOSE`, como se indica en la documentación, añade al Dockerfile
+
+^^^^^^
+
+### Dockerfile
+
+```Dockerfile [5,6]
+# syntax=docker/dockerfile:1
+FROM ubuntu:latest
+LABEL maintainer="alfonso@alfonsoalba.com"
+RUN apt-get update; apt-get install -y nginx
+RUN echo '¡Hola! Soy el contenedor de Alfonso' \
+    >/var/www/html/index.html
+EXPOSE 80
+```
+
+
+[`RUN`](https://docs.docker.com/engine/reference/builder/#run) 
+
+Añadimos el contenido de la página web
+
+^^^^^^
+
+### Dockerfile
+
+```Dockerfile [7]
+# syntax=docker/dockerfile:1
+FROM ubuntu:latest
+LABEL maintainer="alfonso@alfonsoalba.com"
+RUN apt-get update; apt-get install -y nginx
+RUN echo '¡Hola! Soy el contenedor de Alfonso' \
+    >/var/www/html/index.html
+EXPOSE 80
+```
+
+[`EXPOSE`](https://docs.docker.com/engine/reference/builder/#expose) 
+
+Exponemos el puerto 80
+
+notes: 
+
+La instrucción `EXPOSE`, como se indica en la documentación, añade al Dockerfile
   información sobre qué puertos son utilizados por los contenedores pero no hace nada
   más, no abre realmente el puerto ni abre ningún socket. Se usa a modo de documentación.
   Tened en cuenta que el puerto por el que se accede al contenedor desde el host
