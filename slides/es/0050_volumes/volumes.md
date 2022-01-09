@@ -39,27 +39,27 @@ Cuando la configuración del volumen es más compleja, la opción --mount es má
 
 ### Uso: `-v` o `--mount`
 
-```bash
-> docker run -v [NOMBRE VOLUMEN]:[RUTA EN EL CONTENEDOR]:[OPCIONES]
+```shell
+$ docker run -v [NOMBRE VOLUMEN]:[RUTA EN EL CONTENEDOR]:[OPCIONES]
 ```
 
-```bash
-> docker run --rm -v nginx-data:/var/www/ nginx
+```shell
+$ docker run --rm -v nginx-data:/var/www/ nginx
 ```
 
 ^^^^^^
 
 ### Uso: `-v` o `--mount`
 
-```bash
-> docker run --mount [key=value],...
+```shell
+$ docker run --mount [key=value],...
 ```
 
-```bash
-> docker run --rm --mount 'type=volume,src=nginx-data,dst=/var/www/' nginx
+```shell
+$ docker run --rm --mount 'type=volume,src=nginx-data,dst=/var/www/' nginx
 ```
 
-note:
+notes:
 
 `--mount` acepta las siguientes opciones:
 
@@ -72,7 +72,7 @@ note:
 * `volume-opt` opción que se puede especificar más de una vez y que permite pasarle opciones al
   driver que se esté utilizando
 
-[Info](https://docs.docker.com/storage/volumes/#choose-the--v-or---mount-flag)
+[Choose the -v or --mount flag](https://docs.docker.com/storage/volumes/choose-the--v-or---mount-flag)
 
 ^^^^^^
 
@@ -80,13 +80,13 @@ note:
 
 * Crear un volumen
 
-```bash
-> docker volume create [NOMBRE]
+```shell
+$ docker volume create [NOMBRE]
 ```
 
 notes:
 
-[Info](https://docs.docker.com/storage/volumes/#create-and-manage-volumes)
+[Más información: Create and manage volumes](https://docs.docker.com/storage/volumes/create-and-manage-volumes)
 
 
 ^^^^^^
@@ -95,8 +95,8 @@ notes:
 
 * Ver todos los volúmenes
 
-```bash
-> docker volume ls
+```shell
+$ docker volume ls
 ```
 
 ^^^^^^
@@ -105,8 +105,8 @@ notes:
 
 * Ver los detalles de un volumen
 
-```bash
-> docker volume inspect [NOMBRE]
+```shell
+$ docker volume inspect [NOMBRE]
 ```
 
 ^^^^^^
@@ -115,8 +115,8 @@ notes:
 
 * Borrar un volumen
 
-```bash
-> docker volume rm [NOMBRE]
+```shell
+$ docker volume rm [NOMBRE]
 ```
 
 No se puede borrar un volumen que está vinculado a un contenedor
@@ -127,60 +127,108 @@ No se puede borrar un volumen que está vinculado a un contenedor
 
 * Borrar todos los volúmenes que no se están usando
 
-```bash
-> docker volume prune
+```shell
+$ docker volume prune
 ```
 
 ^^^^^^
 
 ### 💻 Práctica 1 💻 ️
 
-Extraer las dipositivas del módulo 5 para poder reutilizarlas en otros contenedores
+Extraer las dipositivas del curso para poder reutilizarlas en otros contenedores
 
-* Creamos el volumen `diapositivas_modulo_5`
+* Creamos el volumen `diapositivas_docker`
 
-```bash
-> docker volume create diapositivas_modulo_5
+```shell
+$ docker volume create diapositivas_docker
 ```
 
-* Creamos un nuevo contenedor a partir de la imagen del módulo 5 utilizando 
+* Creamos un nuevo contenedor a partir de la imagen original utilizando 
   el volumen que acabamos de crear:
 
-```bash
-> docker run -p "8005:8005" 
-         -d
-         --name practica_modulo_5 
-         --mount "type=volume,src=diapositivas_modulo_5,dst=/home/node/slides"
-         becorecode/curso-intro-docker-modulo-5 
+```shell
+$ docker run -p "8005:80" \
+         -d \
+         --name practica_modulo_5 \
+         --mount "type=volume,src=diapositivas_docker,dst=/usr/share/nginx/html" \
+         kubernetescourse/slides-docker
 ```
 
 notes:
 
-Esto crea un contenedor, habilita el puerto 9005 del host para ver las diapositivas
-y monta el volumen `diapositivas_modulo_5` en la carpeta `/home/node/slides`
+Esto crea un contenedor, habilita el puerto 8005 del host para ver las diapositivas
+y monta el volumen `diapositivas_docker` en la carpeta `/usr/share/nginx/html`
 del contenedor
 
-Dado que el volumen `diapositivas_modulo_5` está vacío y la carpeta 
-`/home/node/slides` del contenedor no, **este comando copia los ficheros y carpetas
-de `/home/node/slides` al volumen**
+Podemos verificar que todo funciona abriendo el navegador y accediendo a `localhost:8005`
+
+Dado que el volumen `diapositivas_docker` está vacío y la carpeta 
+`/usr/share/nginx/html` del contenedor no, **este comando copia los ficheros y carpetas
+de `/usr/share/nginx/html` al volumen**
+
 
 Si entramos en el contenedor con `bash` podemos ver el volumen con el comando `mount`
 
+```shell
+
+$ docker exec -ti practica_modulo_5 bash
+
+root@027de5e91568:/ mount 
+
+overlay on / type overlay (rw,relatime,lowerdir=/var/lib/docker/overlay2/l/2BDNRDYZY3ITVTK2IGZQCI7E7U:/var/lib/docker/overlay2/l/CWYHBB2EXYNIHOEZRYW6QLHKDI:/var/lib/docker/overlay2/l/7RJKVQQEHTX47SGRLOJLUXP7KD:/var/lib/docker/overlay2/l/LD5TNCKOUSQSCBAEAS5VA52JAH:/var/lib/docker/overlay2/l/2OLDCTDK7OB3Z6IRL5XPCC7VST:/var/lib/docker/overlay2/l/EZPIWNACSHJOME2W67MV6CY2F4:/var/lib/docker/overlay2/l/7HBGN6BWQFUWHT64IJXJELZWXP:/var/lib/docker/overlay2/l/DOF2O65WYXP4IIPZJKHPBDM7IJ,upperdir=/var/lib/docker/overlay2/7fbbdaf35efeb2ed2fc5f5420934790d56e05895318d495c230b6a63e7315446/diff,workdir=/var/lib/docker/overlay2/7fbbdaf35efeb2ed2fc5f5420934790d56e05895318d495c230b6a63e7315446/work,xino=off)
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /dev type tmpfs (rw,nosuid,size=65536k,mode=755)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=666)
+sysfs on /sys type sysfs (ro,nosuid,nodev,noexec,relatime)
+tmpfs on /sys/fs/cgroup type tmpfs (rw,nosuid,nodev,noexec,relatime,mode=755)
+cgroup on /sys/fs/cgroup/systemd type cgroup (ro,nosuid,nodev,noexec,relatime,xattr,name=systemd)
+cgroup on /sys/fs/cgroup/devices type cgroup (ro,nosuid,nodev,noexec,relatime,devices)
+cgroup on /sys/fs/cgroup/hugetlb type cgroup (ro,nosuid,nodev,noexec,relatime,hugetlb)
+cgroup on /sys/fs/cgroup/cpuset type cgroup (ro,nosuid,nodev,noexec,relatime,cpuset)
+cgroup on /sys/fs/cgroup/cpu,cpuacct type cgroup (ro,nosuid,nodev,noexec,relatime,cpu,cpuacct)
+cgroup on /sys/fs/cgroup/net_cls,net_prio type cgroup (ro,nosuid,nodev,noexec,relatime,net_cls,net_prio)
+cgroup on /sys/fs/cgroup/memory type cgroup (ro,nosuid,nodev,noexec,relatime,memory)
+cgroup on /sys/fs/cgroup/blkio type cgroup (ro,nosuid,nodev,noexec,relatime,blkio)
+cgroup on /sys/fs/cgroup/rdma type cgroup (ro,nosuid,nodev,noexec,relatime,rdma)
+cgroup on /sys/fs/cgroup/pids type cgroup (ro,nosuid,nodev,noexec,relatime,pids)
+cgroup on /sys/fs/cgroup/perf_event type cgroup (ro,nosuid,nodev,noexec,relatime,perf_event)
+cgroup on /sys/fs/cgroup/freezer type cgroup (ro,nosuid,nodev,noexec,relatime,freezer)
+mqueue on /dev/mqueue type mqueue (rw,nosuid,nodev,noexec,relatime)
+shm on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime,size=65536k)
+/dev/vda1 on /etc/resolv.conf type ext4 (rw,relatime,errors=remount-ro)
+/dev/vda1 on /etc/hostname type ext4 (rw,relatime,errors=remount-ro)
+/dev/vda1 on /etc/hosts type ext4 (rw,relatime,errors=remount-ro)
+────────────
+/dev/vda1 on /usr/share/nginx/html type ext4 (rw,relatime,errors=remount-ro)
+────────────
+proc on /proc/bus type proc (ro,nosuid,nodev,noexec,relatime)
+proc on /proc/fs type proc (ro,nosuid,nodev,noexec,relatime)
+proc on /proc/irq type proc (ro,nosuid,nodev,noexec,relatime)
+proc on /proc/sys type proc (ro,nosuid,nodev,noexec,relatime)
+proc on /proc/sysrq-trigger type proc (ro,nosuid,nodev,noexec,relatime)
+tmpfs on /proc/acpi type tmpfs (ro,relatime)
+tmpfs on /proc/kcore type tmpfs (rw,nosuid,size=65536k,mode=755)
+tmpfs on /proc/keys type tmpfs (rw,nosuid,size=65536k,mode=755)
+tmpfs on /proc/timer_list type tmpfs (rw,nosuid,size=65536k,mode=755)
+tmpfs on /proc/sched_debug type tmpfs (rw,nosuid,size=65536k,mode=755)
+tmpfs on /proc/scsi type tmpfs (ro,relatime)
+tmpfs on /sys/firmware type tmpfs (ro,relatime)
+```
 ^^^^^^
 
 #### 💻 Práctica 1 (cont.) 💻 ️
 
 * Si inspeccionamos el volumen:
 
-```bash
-> docker volume inspect diapositivas_modulo_5
+```shell
+$ docker volume inspect diapositivas_docker
 [
     {
         "CreatedAt": "2019-10-13T10:48:42Z",
         "Driver": "local",
         "Labels": {},
-        "Mountpoint": "/var/lib/docker/volumes/diapositivas_modulo_5/_data",
-        "Name": "diapositivas_modulo_5",
+        "Mountpoint": "/var/lib/docker/volumes/diapositivas_docker/_data",
+        "Name": "diapositivas_docker",
         "Options": {},
         "Scope": "local"
     }
@@ -190,27 +238,33 @@ Si entramos en el contenedor con `bash` podemos ver el volumen con el comando `m
 notes:
 
 Si estáis en una máquina Linux, podéis ver el contenido del contenedor en la carpeta
-`/var/lib/docker/volumes/diapositivas_modulo_5/_data`
+`/var/lib/docker/volumes/diapositivas_docker/_data`
 
 Podemos ver el volumen que está usando el contenedor utilizando `docker container inspect`
 
-```bash
-> docker container inspect practica_modulo_5 --format '{{json .Mounts}}'
+```shell
+$ docker container inspect practica_modulo_5 --format '{{json .Mounts}}'
 ```
+
+Mirando el contenido de la carpeta `/var/lib/docker/volumes/diapositivas_docker/_data`
+vemos cómo el volumen que estaba vacío se ha llenado con el contenido de la imagen.
 
 ^^^^^^
 
 #### 💻 Práctica 1 (cont.) 💻 ️
 
 * Ahora creamos un contenedor (usando la imagen de `ubuntu`) y vamos 
-a ver las dapositivas desde ese otro contenedor:
+a ver las diapositivas desde ese otro contenedor:
 
-```bash
-> docker run --rm -ti \
-         --name practica_modulo_5_segundo_contenedor
-         --mount "type=volume,src=diapositivas_modulo_5,dst=/home/node/slides" \
-         ubuntu \
+```shell
+$ docker run --rm -ti \
+         --name practica_modulo_5_segundo_contenedor \
+         --mount "type=volume,src=diapositivas_docker,dst=/mnt/slides" \
+         ubuntu:latest \
          bash   
+root@965d5e539caa:/ ls
+50x.html  README.md  dist  examples     images      js                 package.json
+LICENSE   css        es    gulpfile.js  index.html  package-lock.json  plugin
 ```
 
 ^^^^^^
@@ -220,13 +274,18 @@ a ver las dapositivas desde ese otro contenedor:
 * Creamos una nueva diapositiva desde el contenedor 
   `practica_modulo_5_segundo_contenedor`
 
-```bash
-> echo "### Nueva diapositiva" > /home/node/slides/nueva_diapositiva.md
+```shell
+root@965d5e539caa:/ echo "### Nueva diapositiva" > /mnt/slides/es/0050_volumes/nueva_diapositiva.md
 ```
 
 * Si volvemos al contenedor `practica_modulo_5` y listamos la carpeta
-  `/home/node/slides/`, veremos el nuevo fichero
+  `/usr/share/nginx/html/slides/es/0050_volumes`, veremos el nuevo fichero
 
+```shell
+$ docker exec -ti practica_modulo_5 bash
+root@027de5e91568:/ ls /usr/share/nginx/html/es/0050_volumes/nueva_diapositiva.md 
+/usr/share/nginx/html/es/0050_volumes/nueva_diapositiva.md
+```
 
 ^^^^^^
 
@@ -234,8 +293,8 @@ a ver las dapositivas desde ese otro contenedor:
 
 Podemos crear un volumen anónimo de la siguiente manera:
 
-```backup
-> docker run --rm -v /test -v data:/data ubuntu top
+```shell
+$ docker run --rm -v /test -v data:/data ubuntu top
 ```
 
 * Se crea un volumen anónimo y se monta en `/test` dentro del contenedor
@@ -248,3 +307,16 @@ como el volumen anónimo. El volumen `data` no se borra y podremos verlo
 usando el comando `doker volume ls`
 
 Si entramos en el contenedor con `bash` podemos ver el volumen con el comando `mount`
+
+^^^^^^
+
+### Limpieza
+
+Usando los comandos `docker ps`, `docker stop` y  `docker rm`, eliminar los contenedores
+y volúmenes que hemos utilizado en esta sección
+
+```shell
+$ docker container stop practica_modulo_5
+$ docker conatiner rm practica_modulo_5
+$ volume rm diapositivas_docker
+```

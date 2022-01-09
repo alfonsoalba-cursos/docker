@@ -65,7 +65,7 @@ todos los servicios (o contedenedores) con un único comando**
 1. Ejecutar `docker-compose up` para levantar todos los contenedores en un entorno
    aislado
 
-note:
+notes:
 
 El comando `docker-compose up` levanta todos los servicios definidos en el fichero
 `docker-compose.yml` en un entorno aislado. Por ejemplo, utiliza un 

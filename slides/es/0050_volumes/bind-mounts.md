@@ -9,9 +9,9 @@ Montamos un directorio del host para poder acceder a él dentro del contenedor.
 
 ### Uso: `-v` o `--mount`
 
-```bash
-> docker run -v [RUTA EN EL HOST]:[RUTA EN EL CONTENEDOR]:[OPCIONES]
-> docker run --mount [key=value],...
+```shell
+$ docker run -v [RUTA EN EL HOST]:[RUTA EN EL CONTENEDOR]:[OPCIONES]
+$ docker run --mount [key=value],...
 ```
 
 
@@ -40,7 +40,7 @@ notes:
 ### Uso: `-v` o `--mount`
 
 Si hacemos un _bind mount_ de un fichero o directorio con `-v` y este no existe en 
-el host, **este se crea siempre como un directorio**
+la imagen, **este se crea siempre como un directorio**
 
 Si hacemos un _bind mount_ de un fichero o directorio con `--mount` y este no existe en 
 el host, **se genera un error**
@@ -53,33 +53,52 @@ Utilizando volúmenes, vamos a editar las diapositivas del módulo en caliente.
 
 * Lo primero que haremos será extraer las diapositivas del contendor
 
-```bash 
-> docker run --rm -d --name auxcontainer -p "8005:8005" becorecode/curso-intro-docker-modulo-5
-> docker container cp auxcontainer:/home/node/slides .
-> docker container stop auxcontainer
+```shell 
+$ mkdir ~/diapositivas-curso-docker
+$ cd ~/diapositivas-curso-docker
+$ docker run --rm -d --name auxcontainer -p "8005:80" kubernetescourse/slides-docker
+$ docker container cp auxcontainer:/usr/share/nginx/html .
+$ docker container stop auxcontainer
+
 ```
+
+notes:
+
+El contenedor se borrará, ya que hemos usado la opción `--rm`. Puedes comprobarlo
+usando `docker ps -a`.
+
+Al ejecutar este comando, se creará la carpeta `~/diapositivas-curso-docker/html`
+en cuyo interior podréis encontrar las diapositivas.
 
 ^^^^^^
 
 #### 💻 Práctica 2 (cont.) 💻 ️
 
 * Levantamos un contenedor usando un _bind mount_ para ver las diapositivas del host
-  en la carpeta /home/node/slides del contenedor
+  en la carpeta `/usr/share/nginx/html` del contenedor
 
-```bash 
-> docker run --rm 
-    -d 
-    --name practica_2_modulo_5 
-    --mount "type=bind,src=$(pwd)/slides,dst=/home/node/slides"
-    -p "8005:8005" becorecode/curso-intro-docker-modulo-5
+```shell 
+$ docker run --rm \
+-d \
+--name practica_2_modulo_5 \
+--mount "type=bind,src=$(pwd)/html,dst=/usr/share/nginx/html" \
+-p "8005:80" kubernetescourse/slides-docker
 ```
 ^^^^^^
 
 #### 💻 Práctica 2 (cont.) 💻 ️
 
 * Abre tu editor de Markdown favorito
-* Edita las diapositivas
-* Recarga el navegador para observar los cambios
+* Edita las diapositivas (por ejemplo, el fichero `index.html`)
+* Apunta el navegador a la URL `http://localhost:8005` y podrás ver los cambios
+  que hagas a las diapositivas recargando el navegador
+
+notes:
+
+En este ejemplo, estamos también comprobando que, como diremos en las siguientes
+diapositivas, un punto de montaje de un _bind volume_ oculta el contenido 
+de ese punto de montaje. Es decir, lo que hubiese en la imagen no se puede ya que
+en esa carpeta veremos el contenido del _bind volume_.
 
 ^^^^^^
 
@@ -102,18 +121,7 @@ notes:
 Esta práctica está inspirada en [esta sección](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes) 
 de la documentación de Docker.
 
-^^^^^^
-
-#### 💻 Práctica 3 (cont.) 💻 ️
-
-* Creamos un contenedor con las diapositivas:
-
-```bash
-docker run --rm 
-    -d 
-    --name practica_3_modulo_5 
-    -p "8005:8005" becorecode/curso-intro-docker-modulo-5
-```
+Combinaremos el uso de volúmenes con `_bind mounts_` en un mismo contenedor.
 
 ^^^^^^
 
@@ -122,13 +130,19 @@ docker run --rm
 * Creamos un contenedor con las diapositivas y las montamos en un volumen que llamaremos
   `backup_modulo_5`
 
-```bash
-docker run --rm  \
-    -d \
-    --name practica_3_modulo_5 \
-    --mount "type=volume,src=backup_modulo_5,dst=/home/node/slides" \
-    -p "8005:8005" becorecode/curso-intro-docker-modulo-5
+```shell
+$ docker run --rm  \
+-d \
+--name practica_3_modulo_5 \
+--mount "type=volume,src=backup_modulo_5,dst=/usr/share/nginx/html" \
+-p "8005:80" kubernetescourse/slides-docker
 ```
+
+notes:
+
+Al igual que nos ocurrió en el ejemplo anterior, como el volumen `backup_modulo_5` está vacío,
+el contenido de la carpeta `/usr/share/nginx/html` que está en la imagen,
+se copiará al volumen.
 
 ^^^^^^
 
@@ -136,14 +150,14 @@ docker run --rm  \
 
 * Ejecutamos el siguiente comando de docker para hacer el backup:
 
-```bash 
-> docker run --rm -d \
-      --mount "type=volume,src=backup_modulo_5,dst=/home/node/slides" \
+```shell 
+$ docker run --rm -d \
+      --mount "type=volume,src=backup_modulo_5,dst=/usr/share/nginx/html" \
       --mount "type=bind,src=$(pwd),dst=/backup" \
-      ubuntu tar cfpj /backup/slides.tar.bz2 /home/node/slides
+      ubuntu tar cfpj /backup/slides.tar.bz2 /usr/share/nginx/html
 ```
 
-Tras ejecutarlo, tendremos en nuestra carpeta una copia de las diapositivas
+Tras ejecutarlo, tendremos en nuestra carpeta local una copia de las diapositivas
 
 
 ^^^^^^
@@ -152,8 +166,8 @@ Tras ejecutarlo, tendremos en nuestra carpeta una copia de las diapositivas
 
 * Podemos usar la opción `--volumes-from`
 
-```bash 
-> docker run --rm -d \
+```shell 
+$ docker run --rm -d \
       --volumes-from practica_3_modulo_5  \
       --mount "type=bind,src=$(pwd),dst=/backup" \
       ubuntu tar cfpj /backup/slides.tar.bz2 /home/node/slides
@@ -174,5 +188,5 @@ que los contenedores no tengan permiso para acceder a los _bind mounts_
 Las opciones `z` y `Z` le indiquen a `dockerd` que añada las etiquetas de `selinux` 
 apropiadas a los ficheros en el volumen cuando se arranque el contenedor
 
-[Info](https://docs.docker.com/storage/bind-mounts/#configure-the-selinux-label)
+[Bind mounts: Configure the selinux label](https://docs.docker.com/storage/bind-mounts/#configure-the-selinux-label)
 

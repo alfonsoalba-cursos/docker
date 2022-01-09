@@ -27,7 +27,16 @@ Esta opción no está disponible en Windows.
 
 ^^^^^^
 
-### Uso: `-tmpfs` o `--mount`
+### Uso: `--tmpfs` o `--mount`
+
+```shell
+$ docker run -d \
+-it \
+--name tmptest \
+--tmpfs /app1 \
+--mount type=tmpfs,destination=/app2 \
+nginx:latest
+```
 
 La principal diferencia entre ambos es que `--tmpfs` no permite configurar ninguna opción
 
@@ -38,6 +47,8 @@ notes:
 * `type` debe ser `tmpfs` para este tipo de puntos de montaje
 * `destination` ruta dentro del contenedor en la que montar el volumen. Se puede usar `dst` o
   `target`.
-* `tmpfs-size` tamaño en bytes. Ilimitado por default.
+* `tmpfs-size` tamaño en bytes. Ilimitado por defecto.
 * `tmpfs-mode` permisos de los ficheros en octal, por ejemplo 700 o 0770. 
   Por defecto es 1777
+
+[Use tmpfs mounts](https://docs.docker.com/storage/tmpfs/)
