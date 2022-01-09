@@ -4,6 +4,7 @@
 
 * [Nuestra primera imagen](#/our-first-image)
 * [la caché](/#build-cache)
+* [`buildx`](#buildx)
 * [_parser directives_](#/parser-directives)
 * [ENTRYPOINT vs CMD](#/entrypoint-vs-cmd)
 * [Instrucciones en el Dockerfile](#/dockerfile-instructions)   
