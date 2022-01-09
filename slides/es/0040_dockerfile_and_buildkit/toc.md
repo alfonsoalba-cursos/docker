@@ -3,6 +3,7 @@
 #### Construcción de imágenes (Dockerfile)
 
 * [Nuestra primera imagen](#/our-first-image)
+* [la caché](/#build-cache)
 * [_parser directives_](#/parser-directives)
 * [ENTRYPOINT vs CMD](#/entrypoint-vs-cmd)
 * [Instrucciones en el Dockerfile](#/dockerfile-instructions)   
