@@ -84,7 +84,7 @@ Enlaces para profundizar:
 Construimos la imagen
 
 ```shell
-> DOCKER_BUILDKIT=1 docker build --progress=plain -t="kubernetescourse/static_web:v1" .
+> DOCKER_BUILDKIT=1 docker build --progress=plain -t="kubernetescourse/our-first-image:v1" .
 asdf    asdf    asdfas d
 ```
 
@@ -124,7 +124,7 @@ asdf    asdf    asdfas d
 * Veamos las capas que contiene nuestra imagen:
 
 ```shell
-$ docker image history kubernetescourse/static_web:v1
+$ docker image history kubernetescourse/our-first-image:v1
 IMAGE          CREATED              CREATED BY                                      SIZE      COMMENT
 7d761578acff   About a minute ago   EXPOSE map[80/tcp:{}]                           0B        buildkit.dockerfile.v0 
 <missing>      About a minute ago   RUN /bin/sh -c echo '¡Hola! Soy el contenedo…   37B       buildkit.dockerfile.v0 
