@@ -25,25 +25,25 @@ Clona el repositorio:
 
 ```bash
 > git clone git@github.com:alfonsoalba-cursos/docker.git
-> cd kubernetes
+> cd docker
 ```
 
 Levanta el servidor web:
 
 ```bash
-kubernetes> docker compose up -d slides
+docker> docker compose up -d slides
 ```
 
-Apunta tu navegador a `http://localhost:8080`. Deberías tener acceso ya a las diapositivas.
+Apunta tu navegador a `http://localhost:8081`. Deberías tener acceso ya a las diapositivas.
 
 Cuando acabes, detén el servidor web y borra el contenedor ejecutando el comando:
 
 ```bash
-kubernetes> docker compose down slides
+docker> docker compose down slides
 ```
 
 
 ## Laboratorios
 
-Puedes acceder al índice de laboratorios en este enlace. La documentación para cada uno de ellos
+Puedes acceder al índice de laboratorios en [este enlace](labs/README_es.md). La documentación para cada uno de ellos
 la encontarás en la carpeta correspondiente.
