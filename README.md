@@ -10,6 +10,7 @@ Puedes ver las diapositivas de las siguientes maneras:
 
 ### Viendo la versión online
 
+[https://docker-course.alfonsoalba.com/slides/index.html](https://docker-course.alfonsoalba.com/slides/index.html)
 ### Abriendo los ficheros html
 
 Clona el repositorio en tu máquina, utiliza el navegador de archivos de tu sistema operativo
