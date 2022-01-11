@@ -128,6 +128,8 @@ CMD ["bash"]
 
 [Ver Dockerfile para `scratch`](https://hub.docker.com/_/scratch)<!-- .element: class="fragment"  data-fragment-index="3"-->
 
+[Create a base image (avanzado)](https://docs.docker.com/develop/develop-images/baseimages/)<!-- .element: class="fragment"  data-fragment-index="4"-->
+
 notes:
 
 Para crear la imagen de las diapositivas, hemos seguido esta ruta:
