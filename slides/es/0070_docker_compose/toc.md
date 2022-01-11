@@ -2,12 +2,12 @@
 
 #### `docker-compose`
 
-* [¿Qué es `docker-compose`?](#/concepts)
-* [Instalación](#/installation)
-* [Práctica 1: Wordpress](#/wordpress)
-* [CLI](#/cli)
-* [Definición de servicios](#/docker-compose-reference)
-* [Ejercicio](/#exercise)
+* [¿Qué es `docker compose`?](#concepts)
+* [Instalación](#installation)
+* [Práctica 1: Wordpress](#wordpress)
+* [CLI](#cli)
+* [Definición de servicios](#docker-compose-reference)
+* [Ejercicio](#exercise)
 
 notes:
 

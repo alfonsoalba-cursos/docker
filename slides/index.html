@@ -131,12 +131,17 @@
 					
 					<div class="accordion-item"><!-- DockerCompose -->
 						<h2 class="accordion-header" id="panelsStayOpen-headingDockerCompose">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseDockerCompose" aria-expanded="true" aria-controls="panelsStayOpen-collapseDockerCompose">							
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseDockerCompose" aria-expanded="true" aria-controls="panelsStayOpen-collapseDockerCompose">							
 							7. Aplicaciones multicontenedor con &nbsp;<code>docker compose</code>
 						</button>
 						</h2>
-						<div id="panelsStayOpen-collapseDockerCompose" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingDockerCompose">
+						<div id="panelsStayOpen-collapseDockerCompose" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingDockerCompose">
 							<div class="accordion-body">
+								<p>
+									Ya tenemos todas las piezas necesarias para poder trabajar con una aplicación multicontenedor: imágenes, volúmenes y 
+									<em>bridge networks</em>. Con el fichero <code>compose.yaml</code> definiremos cómo configurar
+									varios contenedores para trabajar de forma conjunta.
+								</p>
 								<ul>
 									<li><a href="es/0070_docker_compose/index.html"  class="text-decoration-none text-reset">Diapositivas 🔗</a></li>
 								</ul>

@@ -1,101 +1,87 @@
-### Command Line Interface
+### _Command Line Interface_
 
-```bash
-wordpress-compose > docker-compose up
+En la página [Docker Compose](https://docs.docker.com/engine/reference/commandline/compose/) 
+podéis encontrar la documentación del comando, incluyendo enlaces a los 
+[subcomandos de `docker compose`](https://docs.docker.com/engine/reference/commandline/compose/#child-commands)
+
+^^^^^^
+### _Command Line Interface_
+
+```shell
+wordpress-compose > docker compose up
 ```
 
 notes:
 
-Ya hemos visto el primer comando del CLI de `docker-compose`. El comando
-`up` 
+Ya hemos visto el primer comando del CLI de `docker compose` en la sección anterior. 
+[El comando `docker compse up`](https://docs.docker.com/engine/reference/commandline/compose_up/)
 
 Este comando construye, crear e inicia los servicios definidos en el fichero
-`docker-compose`
+`docker compose`
 
 ^^^^^^
 
-#### Command Line Interface: `docker-compose up`
+#### _Command Line Interface_: `docker compose up`
 
-Algunas opciones útiles del comando `docker-compose up`
+Algunas opciones útiles del comando `docker compose up`
 
 * `-d`:  ejecuta los contenedores en segundo plano
 * `--build`: construye las imágenes antes de levantar los contenedores
 * `--force-recreate`: en lugar de reutilizar contenedores anteriores, los vuelve a crear
 
-[Más información](https://docs.docker.com/compose/reference/up/)
+[Más información](https://docs.docker.com/engine/reference/commandline/compose_up/)
 
 
 notes:
 
 Puedes ver todas las opciones del comando `up` usando el comando:
 
-<pre>
-docker-compose up -h
-Builds, (re)creates, starts, and attaches to containers for a service.
+```shell
+$ docker compose up --help
 
-Unless they are already running, this command also starts any linked services.
+Usage:  docker compose up [SERVICE...]
 
-The `docker-compose up` command aggregates the output of each container. When
-the command exits, all containers are stopped. Running `docker-compose up -d`
-starts the containers in the background and leaves them running.
-
-If there are existing containers for a service, and the service's configuration
-or image was changed after the container's creation, `docker-compose up` picks
-up the changes by stopping and recreating the containers (preserving mounted
-volumes). To prevent Compose from picking up changes, use the `--no-recreate`
-flag.
-
-If you want to force Compose to stop and recreate all containers, use the
-`--force-recreate` flag.
-
-Usage: up [options] [--scale SERVICE=NUM...] [SERVICE...]
+Create and start containers
 
 Options:
-    -d, --detach               Detached mode: Run containers in the background,
-                               print new container names. Incompatible with
-                               --abort-on-container-exit.
-    --no-color                 Produce monochrome output.
-    --quiet-pull               Pull without printing progress information
-    --no-deps                  Don't start linked services.
-    --force-recreate           Recreate containers even if their configuration
-                               and image haven't changed.
-    --always-recreate-deps     Recreate dependent containers.
-                               Incompatible with --no-recreate.
-    --no-recreate              If containers already exist, don't recreate
-                               them. Incompatible with --force-recreate and -V.
-    --no-build                 Don't build an image, even if it's missing.
-    --no-start                 Don't start the services after creating them.
-    --build                    Build images before starting containers.
-    --abort-on-container-exit  Stops all containers if any container was
-                               stopped. Incompatible with -d.
-    -t, --timeout TIMEOUT      Use this timeout in seconds for container
-                               shutdown when attached or when containers are
-                               already running. (default: 10)
-    -V, --renew-anon-volumes   Recreate anonymous volumes instead of retrieving
-                               data from the previous containers.
-    --remove-orphans           Remove containers for services not defined
-                               in the Compose file.
-    --exit-code-from SERVICE   Return the exit code of the selected service
-                               container. Implies --abort-on-container-exit.
-    --scale SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the
-                               `scale` setting in the Compose file if present.
-</pre>
+      --abort-on-container-exit   Stops all containers if any container was stopped. Incompatible with -d
+      --always-recreate-deps      Recreate dependent containers. Incompatible with --no-recreate.
+      --attach stringArray        Attach to service output.
+      --attach-dependencies       Attach to dependent containers.
+      --build                     Build images before starting containers.
+  -d, --detach                    Detached mode: Run containers in the background
+      --exit-code-from string     Return the exit code of the selected service container. Implies --abort-on-container-exit       
+      --force-recreate            Recreate containers even if their configuration and image haven't changed.
+      --no-build                  Don't build an image, even if it's missing.
+      --no-color                  Produce monochrome output.
+      --no-deps                   Don't start linked services.
+      --no-log-prefix             Don't print prefix in logs.
+      --no-recreate               If containers already exist, don't recreate them. Incompatible with --force-recreate.
+      --no-start                  Don't start the services after creating them.
+      --quiet-pull                Pull without printing progress information.
+      --remove-orphans            Remove containers for services not defined in the Compose file.
+  -V, --renew-anon-volumes        Recreate anonymous volumes instead of retrieving data from the previous containers.
+      --scale scale               Scale SERVICE to NUM instances. Overrides the scale setting in the Compose file if present.     
+  -t, --timeout int               Use this timeout in seconds for container shutdown when attached or when containers are
+                                  already running. (default 10)
+      --wait                      Wait for services to be running|healthy. Implies detached mode.
+```
 
 ^^^^^^
 
-#### Command Line Interface: [`docker-compose down`](https://docs.docker.com/compose/reference/down/)
+#### _Command Line Interface_: [`docker compose down`](https://docs.docker.com/engine/reference/commandline/compose_down/)
 
-Detiene y borra los contenedores creados con el comando `docker-compose up`
+Detiene y borra los contenedores creados con el comando `docker compose up`
 
 Por defecto borra:
-* Los contenedores para los servicios definidos en el fichero `docker-compose`
+* Los contenedores para los servicios definidos en el fichero `docker compose`
 * Las redes definidas en la sección `networks` del fichero de Compose
 * La red por defecto si se ha utilizado una.
 
 
 ^^^^^^
 
-#### Command Line Interface: [`docker-compose down`](https://docs.docker.com/compose/reference/down/)
+#### _Command Line Interface_: [`docker compose down`](https://docs.docker.com/engine/reference/commandline/compose_down/)
 
 Las siguientes opciones permiten borrar más cosas:
 * `--rmi` borra imágenes
@@ -104,12 +90,12 @@ Las siguientes opciones permiten borrar más cosas:
 
 
 ^^^^^^
-#### Command Line Interface: [`docker-compose exec`](https://docs.docker.com/compose/reference/exec/)
+#### _Command Line Interface_: [`docker compose exec`](https://docs.docker.com/engine/reference/commandline/compose_exec/)
 
 Ejecuta un comando en un contenedor en ejecución:
 
-```bash
-wordpress-compose > docker-compose exec wordpress bash
+```shell
+wordpress-compose > docker compose exec wordpress bash
 root@31d0474ac91f:/var/www/html#
 ```
 
@@ -122,30 +108,33 @@ interactivas sin necesidad de opciones adicionales.
 
 Las opciones de este comando son las siguientes:
 
-<pre>
-docker-compose exec [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
+```text
+$ docker compose exec --help
+
+
+Usage:  docker compose exec [options] [-e KEY=VAL...] [--] SERVICE COMMAND [ARGS...]
+
+Execute a command in a running container.
 
 Options:
-    -d, --detach      Detached mode: Run command in the background.
-    --privileged      Give extended privileges to the process.
-    -u, --user USER   Run the command as this user.
-    -T                Disable pseudo-tty allocation. By default `docker-compose exec`
-                      allocates a TTY.
-    --index=index     index of the container if there are multiple
-                      instances of a service [default: 1]
-    -e, --env KEY=VAL Set environment variables (can be used multiple times,
-                      not supported in API < 1.25)
-    -w, --workdir DIR Path to workdir directory for this command.
-</pre>
+  -d, --detach                       Detached mode: Run command in the background.
+  -e, --env stringArray              Set environment variables
+      --index int                    index of the container if there are multiple instances of a service [default: 1].
+                                     (default 1)
+  -T, --no-TTY docker compose exec   Disable pseudo-TTY allocation. By default docker compose exec allocates a TTY.
+      --privileged                   Give extended privileges to the process.
+  -u, --user string                  Run the command as this user.
+  -w, --workdir string               Path to workdir directory for this command.
 
+```
 
 ^^^^^^
-#### Command Line Interface: [`docker-compose top`](https://docs.docker.com/compose/reference/top/)
+#### _Command Line Interface_: [`docker compose top`](https://docs.docker.com/engine/reference/commandline/compose_top/)
 
 Muestra los procesos en ejecución
 
-```bash
-wordpress-compose > docker-compose top
+```shell
+wordpress-compose > docker compose top
 
 wordpress-compose_db_1
 PID    USER   TIME   COMMAND
@@ -169,12 +158,12 @@ __________________________________________
 ```
 
 ^^^^^^
-#### Command Line Interface: [`docker-compose images`](https://docs.docker.com/compose/reference/images/)
+#### _Command Line Interface_: [`docker compose images`](https://docs.docker.com/engine/reference/commandline/compose_images/)
 
 Muestra las imágenes utilizadas por los contenedores
 
-```bash
-wordpress-compose > docker-compose images
+```shell
+wordpress-compose > docker compose images
 
       Container               Repository  Tag      Image Id       Size
 ________________________________________________________________________
@@ -187,37 +176,40 @@ notes:
 Los contenedores deben estar levantados para que este comando muestre algún resultado
 
 ^^^^^^
-#### Command Line Interface: [`docker-compose pause`](https://docs.docker.com/compose/reference/pause/)
+#### _Command Line Interface_: [`docker compose pause`](https://docs.docker.com/engine/reference/commandline/compose_pause/)
 
 Los comandos `pause` y `unpause` sirven para suspender y reactivar servicios
-definidos en `docker-compose.yml`
+definidos en `compose.yaml`
 
 notes:
 
 Pausar el contenedor de wordpress:
 
-```bash
-wordpress-compose > docker-compose pause wordpress
+```shell
+wordpress-compose > docker compose pause wordpress
 ```
 
 Si accedermos a `localhost:8080` el contenedor no responde. Para reactivarlo:
 
-```bash
-wordpress-compose > docker-compose unpause wordpress
+```shell
+wordpress-compose > docker compose unpause wordpress
 ```
 
 ^^^^^^
-#### Command Line Interface: [`docker-compose config`](https://docs.docker.com/compose/reference/config/)
+#### _Command Line Interface_: [`docker compose convert`](https://docs.docker.com/engine/reference/commandline/compose_convert/)
 
-Valida el fichero de configuración `docker-compose.yml` y lo muestra por la consola
+Valida el fichero de configuración `compose.yaml` y lo muestra por la consola
 
 notes:
 
-Una de las opciones que permite el comando `docker-compose config` es
+Es el antiguo `docker-compose config`, de hecho, se ha difinido un alias `docker compose config`
+que ejecuta `docker convert`
+
+Una de las opciones que permite el comando `docker compose convert` es
 obtener el hash de configuración de un servicio:
 
-```bash
-wordpress-compose > docker-compose config --hash="wordpress"
+```shell
+wordpress-compose > docker compose config --hash="wordpress"
 wordpress 04cb8c6a952ab67a69c95af642d3b31c9a5a7e37baa18aecd79e0bc4b0e4bfde
 ```
 
@@ -237,22 +229,25 @@ Como prueba de uso:
 
 ^^^^^^
 
-#### Command Line Interface: [`docker-compose kill`](https://docs.docker.com/compose/reference/kill/)
+#### _Command Line Interface_: [`docker compose kill`](https://docs.docker.com/engine/reference/commandline/compose_kill/)
 
 Permite enviar una señal IPC a un contenedor
 
-```bash
-wordpress-compose > docker-compose kill -s SIGTERM wordpress
+```shell
+wordpress-compose > docker compose kill -s SIGTERM wordpress
 ```
 
 notes:
 
-```bash
-Usage: kill [options] [SERVICE...]
+```shell
+docker compose kill --help
+
+Usage:  docker compose kill [options] [SERVICE...]
+
+Force stop service containers.
 
 Options:
-    -s SIGNAL         SIGNAL to send to the container.
-                      Default signal is SIGKILL.
+  -s, --signal string   SIGNAL to send to the container. (default "SIGKILL")
 ```
 
 [POSIX Signals](https://en.wikipedia.org/wiki/Signal_(IPC)#POSIX_signals)
@@ -260,22 +255,22 @@ Options:
 
 ^^^^^^
 
-#### Command Line Interface: [`docker-compose logs`](https://docs.docker.com/compose/reference/logs/)
+#### _Command Line Interface_: [`docker compose logs`](https://docs.docker.com/engine/reference/commandline/compose_logs/)
 
 Muestra los logs de un servicio
 
-```bash
-wordpress-compose > docker-compose logs -f db
+```shell
+wordpress-compose > docker compose logs -f db
 ```
 
 ^^^^^^
 
-#### Command Line Interface: [`docker-compose ps`](https://docs.docker.com/compose/reference/ps/)
+#### _Command Line Interface_: [`docker compose ps`](https://docs.docker.com/compose/reference/ps/)
 
 Muestra los contenedores en ejecución
 
-```bash
-wordpress-compose > docker-compose ps
+```shell
+wordpress-compose > docker compose ps
 
         Name                       Command               State          Ports
 _____________________________________________________________________________________
@@ -285,41 +280,41 @@ wordpress_wordpress_1   docker-entrypoint.sh apach ...   Up      0.0.0.0:8080->8
 
 ^^^^^^
 
-#### Command Line Interface: [`docker-compose pull`](https://docs.docker.com/compose/reference/pull/)
+#### _Command Line Interface_: [`docker compose pull`](https://docs.docker.com/engine/reference/commandline/compose_pull/)
 
 Se descarga la imagen asociada a un servicio
 
-```bash
-wordpress-compose > docker-compose pull wordpress
+```shell
+wordpress-compose > docker compose pull wordpress
 ```
 
 ^^^^^^
 
-#### Command Line Interface: [`docker-compose start`](https://docs.docker.com/compose/reference/start/) / [`stop`](https://docs.docker.com/compose/reference/stop/) / [`restart`](https://docs.docker.com/compose/reference/restart/)
+#### _Command Line Interface_: [`docker compose start`](https://docs.docker.com/engine/reference/commandline/compose_start/) / [`stop`](https://docs.docker.com/engine/reference/commandline/compose_stop/) / [`restart`](https://docs.docker.com/engine/reference/commandline/compose_restart/)
 
 Estos tres comandos sirven para parar, iniciar o reiniciar cualquiera de los servicios
-definidos en el fichero `docker-compose.yml`
+definidos en el fichero `compose.yaml`
 
-```bash
-wordpress-compose > docker-compose restart wordpress
+```shell
+wordpress-compose > docker compose restart wordpress
 ```
 
 ⚠️ Nota importante: las modificaciones realizadas sobre el fichero
-`docker-compose.yml` no se reflejarán ejecutando `restart` o 
+`compose.yaml` no se reflejarán ejecutando `restart` o 
 `stop -> start`
 
 
 ^^^^^^
-#### Command Line Interface: [`docker-compose run`](https://docs.docker.com/compose/reference/run/)
+#### _Command Line Interface_: [`docker compose run`](https://docs.docker.com/engine/reference/commandline/compose_run/)
 
 Ejecuta un comando utilizando un contenedor definido en uno de los servicios
 
-```bash
-wordpress-compose > docker-compose run wordpress bash
+```shell
+wordpress-compose > docker compose run wordpress bash
 ```
 
-```bash
-docker-compose ps
+```shell
+docker compose ps
                 Name                              Command               State          Ports
 ____________________________________________________________________________________________________
 wordpress_db_1                         docker-entrypoint.sh mysqld      Up      3306/tcp, 33060/tcp
@@ -334,22 +329,29 @@ como argumento. Para comprobar que se levanta un nuevo contenedor, podemos utili
 el comando `docker-compos ps` como se indica en la captura de la diapositivam
 en la que vemos los dos contenedores:
 
-* `wordpress_wordpress_1` que se levantó con `docker-compose up`
+* `wordpress_wordpress_1` que se levantó con `docker compose up`
 * `wordpress_wordpress_run_e433c908717e` que es el que levantamos con 
-  `docker-compose run`
+  `docker compose run`
 
-Además, como vemos en la diapositiva también **el comando `docker-compose run`**
-no hace port-binding de los puertos definidos en el fichero `docker-compose.yml`.
+Además, como vemos en la diapositiva también **el comando `docker compose run`**
+no hace port-binding de los puertos definidos en el fichero `compose.yaml`.
 Esto se hace así para evitar errores por que los puertos ya puedan estar ocupados,
 como es el caso en el ejemplo que nos ocupa en esta diaposisitiva.
 
-Si queremos que se los puertos asociados al servicio se creen, podemos usar la
+Si queremos que los puertos asociados al servicio se creen, podemos usar la
 opción `--service-ports` o la opción `-p` si queremos hacerlo de forma manual:
 
-```bash
-wordpress-compose > docker-compose run --service-ports wordpress bash
+```shell
+wordpress-compose > docker compose run --service-ports wordpress bash
 ```
 
 Si el servicio que queremos levanta depende de otros servicios, el comando
 run verifica que estos servicios estén levantados (levantándolos si no lo están) 
 antes de ejecutar el comando.
+
+^^^^^^
+#### _Command Line Interface_: [`docker compose logs`](https://docs.docker.com/engine/reference/commandline/compose_logs/)
+
+Muestra los logs de un servicio.
+
+Muy útil cuando se han levantado los servicios usando `docker compose up --detach`

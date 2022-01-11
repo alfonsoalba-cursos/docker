@@ -17,7 +17,7 @@ La pega que tiene este contenedor es que aunque se está ejecutando, **no podemo
 
 **Para parar el contenedor pulsar CTRL + c en Windows y Linux o CMD + c en Mac.**
 
-Antes de seguir: si accedemos a la documentación de `docker run` o `docker-compose` veréis un montón de opciones.
+Antes de seguir: si accedemos a la documentación de `docker run` o `docker compose` veréis un montón de opciones.
 Veremos las más utilizadas durante el curso aunque **no entraremos en detalles de todas ellas**. No es el objetivo
 del curso y para eso está la documentación. En este curso nos vamos a centrar en entender cómo 
 funcionan los contenedores para que cuando reviséis por vuestra cuenta las opciones en la documentación, podáis

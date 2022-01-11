@@ -4,7 +4,7 @@
 * Módulo 4: Creando nuestra imágenes (Dockerfile)
 * Módulo 5: Volúmenes
 * Módulo 6: Networking
-* Módulo 7: docker-compose
+* Módulo 7: 
 * Módulo 8: Container tecnology overview
 * Módulo 9: Configurar `dockerd`
 * Módulo 10: Docker swarm

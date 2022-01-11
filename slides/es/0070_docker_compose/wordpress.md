@@ -3,7 +3,7 @@
 notes:
 
 En esta práctica, vamos a levantar una página en wordpress utilizando 
-docker-compose para ilustrar cómo se utiliza.
+`docker compose` para ilustrar cómo se utiliza.
 
 ^^^^^^
 
@@ -23,11 +23,9 @@ wordpress-compose >
 
 #### 💻️ Práctica: levantar un wordpress ️️💻️
 
-Crear un fichero `docker-compose.yml` con el siguiente contenido:
+Crear un fichero `compose.yaml` con el siguiente contenido:
 
 ```yaml
-version: '3.7'
-
 services:
    db:
      image: mysql:5.7
@@ -63,7 +61,7 @@ volumes:
 Levanta los contenedores:
 
 ```bash
-wordpress-compose > docker-compose up
+wordpress-compose > docker compose up
 ```
 
 ^^^^^^

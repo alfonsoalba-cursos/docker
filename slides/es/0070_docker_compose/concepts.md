@@ -1,13 +1,12 @@
-### ¿Qué es `docker-compose`?
+### ¿Qué es `docker compose`?
 
 **Herramienta para definir y ejecutar aplicaciones multi-contenedor**
 
 ^^^^^^
 
-#### ¿Qué es `docker-compose`?
+#### ¿Qué es `docker compose`?
 
-* Utilizamos un fichero `yaml` para definir los servicios que necesita nuestra
-  aplicación
+Utilizamos un fichero `yaml` para definir los servicios (contenedores) que necesita nuestr aplicación
 
 ```yaml
 version: '3'
@@ -18,13 +17,13 @@ services:
     - "5000:5000"
     volumes:
     - .:/code
-    - logvolume01:/var/log
+    - images:/code/images
     links:
     - redis
   redis:
     image: redis
 volumes:
-  logvolume01: {}
+  images: {}
 ```
 
 notes:
@@ -37,44 +36,44 @@ una aplicación multi-contenedor que define dos servicios:
 * Un servicio redis
 
 En la definición de `web`, incluimos instrucciones sobre cómo construir la imagen:
-usando el `Dockerfile` que estará situado junto al fichero `docker-compose` en 
+usando el `Dockerfile` que estará situado junto al fichero `docker compose` en 
 el sistema de ficheros (`build: .`)
 
-También vemos la definición de un volumen en el que se almacenarán los logs 
-de la aplicación `- logvolume01:/var/log`.
+También vemos la definición de un volumen en el que se almacenarán imágenes 
+de la aplicación `- images:/code/images`.
 
 A lo largo del módulo, entraremos en más profundidad en las diferentes opciones
-que nos da `docker-compose`.
+que nos da `docker compose`.
 
 ^^^^^^
 
-#### ¿Qué es `docker-compose`?
+#### ¿Qué es `docker compose`?
 
 **Una vez definido el fichero de `docker-compose.yml` podemos levantar 
-todos los servicios (o contedenedores) con un único comando**
+todos los servicios (contedenedores) con un único comando**
 
 ^^^^^^
 
-#### ¿Qué es `docker-compose`?
+#### ¿Qué es `docker compose`?
 
-¿Cómo usar `docker-compose`?
+¿Cómo usar `docker compose`?
 
 1. Crear la imagen de nuestra aplicación con un `Dockerfile`
 1. Definimos todos los servicios que necesita utilizar nuestra aplicación en
    el fichero `docker-compose.yml`
-1. Ejecutar `docker-compose up` para levantar todos los contenedores en un entorno
+1. Ejecutar `docker compose up` para levantar todos los contenedores en un entorno
    aislado
 
 notes:
 
-El comando `docker-compose up` levanta todos los servicios definidos en el fichero
+El comando `docker compose up` levanta todos los servicios definidos en el fichero
 `docker-compose.yml` en un entorno aislado. Por ejemplo, utiliza un 
-_user-defined bridge_ para aislar la rede de los contenedores del resto de procesos y/o
+_user-defined bridge_ para aislar la red de los contenedores del resto de procesos y/o
 contenedores que podamos tener ejecutándose en la máquina.
 
 ^^^^^^
 
-#### ¿Qué es `docker-compose`?
+#### ¿Qué es `docker compose`?
 
 Compose tiene comandos para gestionar el ciclo de vida completo de la aplicación:
 

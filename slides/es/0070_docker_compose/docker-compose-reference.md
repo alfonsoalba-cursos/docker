@@ -1,6 +1,6 @@
 ### Definición de servicios
 
-Podéis encontrar la especificación completa del fichero `docker-compose.yml`
+Podéis encontrar la especificación completa del fichero `compose.yaml`
 en la [documentación oficial de Docker](https://docs.docker.com/compose/compose-file/)
 
 ^^^^^^
@@ -39,7 +39,7 @@ En el ejemplo que hemos puesto, estamos definiendo cuál es el _build context_
 así como el `Dockerfile` a utilizar. 
 
 En la [documentación de `build`](https://docs.docker.com/compose/compose-file/#build) 
-podemos encontrar todas las opciones que `docker-compose.yml` nos permite utilizar
+podemos encontrar todas las opciones que `compose.yaml` nos permite utilizar
 para generar la imagen
 
 ^^^^^^
