@@ -6,7 +6,11 @@ que se puedan necesitar durante el proceso de construcción de una imagen
 
 ha sido una de las mejoras estrella que introdujo BuildKit
 
-[Documentación sobre BuildKit Secrets](https://docs.docker.com/develop/develop-images/build_enhancements/#new-docker-build-secret-information)
+Más información:
+* [Documentación sobre BuildKit Secrets](https://docs.docker.com/develop/develop-images/build_enhancements/#new-docker-build-secret-information)
+* [Dockerfile frontend syntaxes (sección sobre --mount=type=secret)](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypesecret)
+
+
 
 notes:
 

@@ -11,6 +11,7 @@
 * [Ejecutando comandos](#running-commands)
 * [Añadiendo ficheros a nuestra imagen](#copy-files)
 * [_Secrets_](#secrets)
+* [`RUN --mount=type=cache`](#run-mount-cache)
 * [Buenas prácticas](#best-practices)
 * [Ejercicio](#exercise)
 
