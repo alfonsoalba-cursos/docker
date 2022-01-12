@@ -2,9 +2,9 @@
 
 En este curso hemos visto dos herramientas para la orquestación de contendores:
 
-* [Docker Compose](https://cloud.docker.com/u/becorecode/repository/docker/becorecode/curso-intro-docker-modulo-7) 
+* [Docker Compose](https://docker-course.alfonsoalba.com/slides/es/0070_docker_compose/index.html) 
   en el módulo 7
-* [Docker Swarm](https://cloud.docker.com/u/becorecode/repository/docker/becorecode/curso-intro-docker-modulo-8) 
+* [Docker Swarm](https://docker-course.alfonsoalba.com/slides/es/0080_docker_swarm/index.html) 
   en el módulo 8
 
 ^^^^^^

@@ -34,10 +34,11 @@ Para poder ejectuar contenedores en un host
 
 ^^^^^^
 
-**```dockerd``` necesita ejecutarse con permisos de root.**
+**```dockerd``` se ejecuta por defecto con permisos de root.**
 
-Existe un modo ["Rootless"](https://github.com/docker/engine/blob/v19.03.0-rc3/docs/rootless.md) 
-pero a día de hoy está todavía en modo experimentación.
+Existe un modo ["Rootless"](https://docs.docker.com/engine/security/rootless/) 
+
+Nos permite ejecutar `dockerd` sin privilegios de `root`
 
 ^^^^^^
 
@@ -59,7 +60,8 @@ Además, al ser un socket UNIX, puedes limitar el acceso usando el sistema tradi
 
 
 notes:
-El socket UNIX es el que usa Docker CLI para comunicarse con ```dockerd```
+
+El socket UNIX es el que usa Docker CLI por defecto para comunicarse con `dockerd`
 
 ^^^^^^
 
@@ -71,7 +73,7 @@ El socket UNIX es el que usa Docker CLI para comunicarse con ```dockerd```
 
 ^^^^^^
 
-### A ```dockerd``` le gusta estar solo...
+### A `dockerd` le gusta estar solo...
 
 Se recomienta que si un host va a ejecutar contenedores, este sólo corra el demonio
 
@@ -85,8 +87,6 @@ Se pueden mantener servicios como SSH y herramientas administrativas y/o de supe
 
 La respuesta es NO en un 99,99999999999999999999999% de las veces
 
-...bueno, quizás esté exagerando un poco con los 9s<!-- .element: class="fragment" data-fragment-index="1" -->
-
 ^^^^^^
 #### ¿Necesitamos ejecutar los procesos de un contenedor como root?
 
@@ -96,10 +96,10 @@ En la máquina host, **SÍ** habrá servicios que necesitemos ejecutar como root
 
 #### ¿Necesitamos ejecutar los procesos de un contenedor como root?
 
-* No necesitamos acceder por ssh al contenedor. Accedemos al host por ssh y usando ```docker exec``` accedemos al contenedor
-* Si la aplicación requiere el uso de ```cron``` este se puede ejecutar como un proceso de usuario personalizado para la aplicación en cuestión. **No se necesita un cron de sistema**
-* La gestión del log del contenedor la hace normalmente ```dockerd``` del host
-* La red la gestiona ```dockerd```
+* No necesitamos acceder por ssh al contenedor. Accedemos al host por ssh y usando `docker exec` accedemos al contenedor
+* Si la aplicación requiere el uso de `cron` este se puede ejecutar como un proceso de usuario personalizado para la aplicación en cuestión. **No se necesita un cron de sistema**
+* La gestión del log del contenedor la hace normalmente `dockerd` del host
+* La red la gestiona `dockerd`
 * No hace falta gestionar hardware ni dispositivos
 
 
@@ -108,7 +108,7 @@ En la máquina host, **SÍ** habrá servicios que necesitemos ejecutar como root
 
 Si lo tenemos que hacer **podemos ejecutar nuestros contenedores con un usuario root muy "capado"**
 
-* no puede montar de dispositivos (```mount```)
+* no puede montar de dispositivos (`mount`)
 * no puede acceder a raw sockets (para evitar packet spoofing)
 * no puede realizar operaciones sobre el sistema de ficheros
 * no puede cargar módulos
@@ -130,7 +130,7 @@ Así, incluso si un atacante obtiene permisos de root en el contenedor
 
 ### Vectores de ataque sobre las imágenes
 
-Un atacante puede generar una imagen falsa e intentar colártela usando ```docker load```
+Un atacante puede generar una imagen falsa e intentar colártela usando `docker load`
 
 Para hacerlo, el atacante genera una imagen falsa que genera una colisión: tiene el mismo checksum que la imagen original.
 
@@ -214,10 +214,11 @@ touch: secrets/x: Read-only file system
 
 * [Docker Bench for Securiry](https://github.com/docker/docker-bench-security) 
   Script para testar multitud de buenas prácticas y configuraciones en producción
-* [Clair](https://coreos.com/clair/docs/latest/) Análisis estático de vulnerabilidades
+* [Clair](https://www.redhat.com/en/topics/containers/what-is-clair) Análisis estático de vulnerabilidades
 * [Cilium](https://github.com/cilium/cilium) Seguridad adicional de red 
   (Layer 7)
 * [Anchore](https://github.com/anchore/anchore-engine) Análisis de imágenes
+* [snyk](https://snyk.io/docker/)
 * [lynis](https://cisofy.com/lynis/) / [lynis-docker](https://cisofy.com/lynis/plugins/docker/)
 
 
@@ -231,17 +232,18 @@ touch: secrets/x: Read-only file system
 
 notes:
 
-Enlace adicional: https://www.mankier.com/8/docker_selinux
+Enlace adicional: [container_selinux - Man Page](https://www.mankier.com/8/docker_selinux)
 
 ^^^^^^
 
 ### Otras herramientas de seguridad del kernel
 
-* A partir de Docker 1.10 ```dockerd``` soporta "User Namespaces"
+* A partir de Docker 1.10 `dockerd` soporta "User Namespaces"
 * Esto permite mapear el usuario root dentro del contenedor a un usuario con id distinto de cero **fuera del contenedor**
 * Así podemos mitigar ataques en los que el atacante consiga escapar del contenedor
 * Más información:
-  * [Configuración de ```dockerd```](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-user-namespace-options)
+  * [Configuración de `dockerd`](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-user-namespace-options)
+  * [Isolate containers with a user namespace](https://docs.docker.com/engine/security/userns-remap/)
   * [Este post](https://integratedcode.us/2015/10/13/user-namespaces-have-arrived-in-docker/)
 
 
@@ -253,5 +255,4 @@ Enlace adicional: https://www.mankier.com/8/docker_selinux
 * [Docker Labs sobre capabilities](https://github.com/docker/labs/tree/master/security/capabilities)
 * [Charla de Jose Manuel Ortega](https://www.youtube.com/watch?v=nluTVEjycF0&feature=youtu.be)
 * [10 Herramientas de seguridad sobre docker (post)](https://techbeacon.com/security/10-top-open-source-tools-docker-security)
-* [Docker Security (Book)](https://www.oreilly.com/library/view/docker-security/9781492042297/)
-* [Securing Docker (Book)](https://www.packtpub.com/eu/virtualization-and-cloud/securing-docker)
+* [Docker Security (Report)](https://www.oreilly.com/library/view/docker-security/9781492042297/)

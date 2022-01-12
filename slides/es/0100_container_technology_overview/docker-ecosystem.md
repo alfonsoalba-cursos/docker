@@ -43,7 +43,7 @@ is a lightweight, open governance structure (project), formed under the auspices
 
 ¿Qué se busca conseguir con esta especificación?
 
-* Que los contenedores que no estén ligados a un cliente o sistema de 
+* Que los contenedores no estén ligados a un cliente o sistema de 
   orquestación particular
 * Que los contenedores no estén asociados a un determinado fabricante o
   proyecto
@@ -53,7 +53,7 @@ is a lightweight, open governance structure (project), formed under the auspices
 ^^^^^^
 #### Docker Ecosystem: 2015 - OCI
 
-Hasta el momento ha liberado dos especificaciones:
+Hasta el momento ha liberado varias especificaciones, entre ellas:
 * [runtime-spec](https://github.com/opencontainers/runtime-spec) Especifica la configuración, entorno de ejecución y ciclo de vida de un contenedor
 * [image-spec](https://github.com/opencontainers/image-spec) define una imagen, que consiste en un _manifest_, un índice (opcional) un conjunto de capas y una configuration
 
@@ -61,7 +61,7 @@ Hasta el momento ha liberado dos especificaciones:
 
 #### Docker Ecosystem: 2015 - OCI
 
-Actualmente cuenta entre sus [miembros](https://www.opencontainers.org/about/members) con Facebook, Alibaba Cloud, Amazon Web Services, Google, IBM, Intel, Microsoft entre otros
+Actualmente cuenta entre sus [miembros](https://opencontainers.org/) con Facebook, Alibaba Cloud, Amazon Web Services, Google, IBM, Intel, Microsoft entre otros
 
 ^^^^^^
 #### Docker Ecosystem: 2015 - OCI
