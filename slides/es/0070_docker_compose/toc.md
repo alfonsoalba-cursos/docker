@@ -7,8 +7,8 @@
 * [Práctica 1: Wordpress](#wordpress)
 * [CLI](#cli)
 * [Definición de servicios](#docker-compose-reference)
-* [`.env`](#environment)
-* []
+* [`.env`](#environment-variables)
+* [Perfiles](#profiles)
 * [Ejercicio](#exercise)
 
 notes:
