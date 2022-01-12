@@ -2,10 +2,12 @@
 
 `dockerd` se puede configurar de dos maneras:
 
-* a través de un fichero de configuración `daemon.json` 
-  
-  👆recomendado en la documentación👆
+* a través de un fichero de configuración `daemon.json`  👈
 * pasándole opciones al comando `dockerd` cuando se ejecuta
+
+notes:
+
+La primera opción es la forma que nos recomiendan en la documentación.
 
 ^^^^^^
 

@@ -91,7 +91,7 @@ Editamos el fichero de configuración de `dockerd` en `/etc/docker/daemon.json`
 
 #### Ejemplo de configuración: TLS en Linux
  
-En este fichero de configuración hemos definido que quetemos acceder a docker usando dos métodos:
+En este fichero de configuración hemos definido que queremos acceder a docker usando dos métodos:
 
 * socket unix
 * puerto tpc 2376 usando TLS
