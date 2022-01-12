@@ -5,7 +5,43 @@ podéis encontrar la documentación del comando, incluyendo enlaces a los
 [subcomandos de `docker compose`](https://docs.docker.com/engine/reference/commandline/compose/#child-commands)
 
 ^^^^^^
-### _Command Line Interface_
+### _Command Line Interface_:  [`docker compose build`](https://docs.docker.com/engine/reference/commandline/compose_build/)
+
+Construye las imágenes de los servicios que tienen definida una sección `build` 
+dentro de `compose.yaml`
+
+```shell
+wordpress-compose > COMPOSE_DOCKER_CLI_BUILD=1 docker compose build
+```
+
+notes:
+
+En Docker for Mac y Docker for Windows, no hace utilizar la variable `COMPOSE_DOCKER_CLI_BUILD`,
+ya que por defecto utilizan BuildKit.
+
+Es posible pasar como argumento el servicio que queremos construir. Si se omite,
+se construirán todos.
+
+
+```shell
+$ docker compose build --help
+
+Usage:  docker compose build [SERVICE...]
+
+Build or rebuild services
+
+Options:
+      --build-arg stringArray   Set build-time variables for services.
+      --no-cache                Do not use cache when building the image
+      --progress string         Set type of progress output (auto, tty,
+                                plain, quiet) (default "auto")
+      --pull                    Always attempt to pull a newer version of
+                                the image.
+  -q, --quiet                   Don't print anything to STDOUT
+```
+
+^^^^^^
+### _Command Line Interface_:  `docker compose up`
 
 ```shell
 wordpress-compose > docker compose up

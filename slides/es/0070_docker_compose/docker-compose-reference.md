@@ -1,6 +1,6 @@
 ### Definición de servicios
 
-Podéis encontrar la especificación completa del fichero `compose.yaml`
+Podéis encontrar la especificación completa del fichero `composed.yaml`
 en la [documentación oficial de Docker](https://docs.docker.com/compose/compose-file/)
 
 ^^^^^^
