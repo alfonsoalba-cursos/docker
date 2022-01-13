@@ -12,6 +12,7 @@
 * [Añadiendo ficheros a nuestra imagen](#copy-files)
 * [_Secrets_](#secrets)
 * [`RUN --mount=type=cache`](#run-mount-cache)
+* [BuildKit _cache exporters_](#cache-exporters)
 * [Buenas prácticas](#best-practices)
 * [Múltiples servicios por contenedor](#multiple-services-in-a-container)
 * [Ejercicio](#exercise)
