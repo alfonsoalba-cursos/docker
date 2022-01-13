@@ -13,6 +13,7 @@
 * [_Secrets_](#secrets)
 * [`RUN --mount=type=cache`](#run-mount-cache)
 * [Buenas prácticas](#best-practices)
+* [Múltiples servicios por contenedor](#multiple-services-in-a-container)
 * [Ejercicio](#exercise)
 
 notes:
