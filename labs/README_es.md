@@ -6,3 +6,4 @@
   * [Tutorial de Rails](images/rails-tutorial-image/README_es.md)
 * Módulo 4: Dockerfile and buildkit
   * [_cache invalidation_](0040-dockerfile-and-buildkit/cache-invalidation/README_es.md)
+  * [Generador de proyectos de rails](0040-dockerfile-and-builkit/dockerfile-to-create-rails-projects/README_es.md)
