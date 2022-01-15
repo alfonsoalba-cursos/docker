@@ -187,3 +187,9 @@ Más información:
 
 * [Leverage build cache](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)
 * [DOCKER IMAGES AND THEIR LAYERS EXPLAINED](https://dominikbraun.io/blog/docker/docker-images-and-their-layers-explained/)
+
+^^^^^^ 
+
+### 💻 Lab. _Cache invalidation_
+
+[Ir al taller](https://github.com/alfonsoalba-cursos/docker/tree/main/labs/0040-dockerfile-and-builkit/cache-invalidation)
