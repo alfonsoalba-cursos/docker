@@ -192,6 +192,12 @@ COPY --from=build /blog .
 
 ## Limpieza
 
+---
+⚠ si vas a continuar con el [siguiente taller](../dockerfile-for-our-rails-application/README_es.md), no borres
+la carpeta `blog/`
+
+---
+
 Borramos la carpeta `blog` y las imágenes que hemos creado:
 ```shell
 $ rm -rf blog
@@ -203,3 +209,8 @@ Si no lo hicimos en el paso anterior, paramos y borramos el contenedor `blog-tmp
 ```shell
 $ docker container stop blog-tmp
 ```
+
+## Siguiente paso
+
+En el [siguiente taller](../dockerfile-for-our-rails-application/README_es.md), empaquetaremos la aplicación
+en una imagen.
