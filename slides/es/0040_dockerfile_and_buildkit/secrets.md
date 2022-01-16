@@ -134,5 +134,17 @@ Recuerda que lo único que estamos haciendo es seleccionar la clave privada
 a utilizar, **no se transifere al contexto de ejecución**. Ambas claves deberán
 haber sido previamente cargadas usando `ssh-add`.
 
+Otra opción que tenemos, en lugar de pasar directamente las claves ssh es 
+utilizar dos agentes diferentes, cada uno con su propio socket:
+
+```shell
+$ docker build --ssh projecta=/path/to/socket/a --ssh projectb=/path/to/socket/b .
+```
+
 Más información en [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
 
+^^^^^^
+
+## 💻 Lab. `docker buildx build --ssh`
+
+[Ir al taller](https://github.com/alfonsoalba-cursos/docker/tree/main/labs/0040-dockerfile-and-builkit/docker-build-ssh-option)

@@ -1,0 +1,14 @@
+# syntax=docker/dockerfile:1
+FROM ubuntu:latest as build
+
+RUN apt update && apt install -y openssh-client git gcc
+RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan -t ecdsa github.com >> ~/.ssh/known_hosts
+RUN --mount=type=ssh git clone git@github.com:alfonsoalba-cursos/a-simple-private-repository.git /app
+
+WORKDIR /app
+RUN gcc main.c
+
+FROM ubuntu:latest
+
+COPY --from=build /app /
+CMD ["/a.out"]
