@@ -62,3 +62,8 @@ Borramos la imagen:
 ```shell
 $ docker image rm dockerlabs/rails-tutorial:2
 ```
+
+## Siguiente paso
+
+En el [siguiente laboratorio](../buildkit-cache-mounts/README_es.md) empezaremos a optimizar el proceso de construcción de nuestra imagen
+mediante el uso de _BuildKit cache mounts_.
