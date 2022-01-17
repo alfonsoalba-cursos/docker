@@ -1,9 +1,0 @@
-# syntax=docker/dockerfile:1
-# Version: 0.0.1
-FROM ubuntu:latest
-LABEL maintainer="alfonso@alfonsoalba.com"
-RUN mkdir -p /var/www/html/ && \
-    echo '¡Hola! Soy el contenedor de Alfonso!!' \
-    >/var/www/html/index.html
-RUN apt-get update; apt-get install -y nginx
-EXPOSE 80
