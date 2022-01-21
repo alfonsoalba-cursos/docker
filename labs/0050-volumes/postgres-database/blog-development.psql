@@ -1,0 +1,3 @@
+create database "blog-development" ;
+CREATE ROLE "blog-development" with PASSWORD '12345678' LOGIN;
+grant all privileges on database "blog-development" to "blog-development";

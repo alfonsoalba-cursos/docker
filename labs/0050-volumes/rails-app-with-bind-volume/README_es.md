@@ -100,3 +100,7 @@ $ docker container stop rails-tutorial
 $ docker image rm dockerlabs/rails-tutorial:2
 $ docker container rm rails-tutorial
 ```
+
+## Siguiente paso
+
+Para poder trabajar con Rails, necesitaremos una base de datos. En el [siguiente taller](../labs\0050-volumes\rails-app-with-bind-volume/README_es.md) veremos cómo crearla y persistir los datos utilizando volúmenes.
