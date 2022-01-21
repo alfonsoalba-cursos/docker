@@ -17,7 +17,7 @@ Si no tienes la aplicación rails creada, sigue los pasos de ese taller para gen
 Una vez la hayas generado, copiala a la carpeta de este taller:
 
 ```shell
-$ cp -r ../../0040-dockerfile-and-buildkit/dockerfile-to-create-rails-projects/blog
+$ cp -r ../../0040-dockerfile-and-buildkit/dockerfile-to-create-rails-projects/blog .
 ```
 
 ## El _problema_
