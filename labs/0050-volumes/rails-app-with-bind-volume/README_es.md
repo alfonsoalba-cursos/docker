@@ -6,10 +6,6 @@ Todos los comandos están ejecutados utilizando esta carpeta como ruta de trabaj
 
 Ilustrar el uso de los _bind volumes_.
 
-En uno de los [laboratorios previos ()](../../0040-dockerfile-and-builkit/dockerfile-for-our-rails-application), 
-creamos un fichero `Dockerfile` y extrajimos el código del blog a una carpeta. En este taller vamos a utilizar el
-la imagen que creamos en ese laboratorio para ilusstrar el uso de los _bind volumes_.
-
 ## La aplicación
 
 Utilizaremos la aplicación `blog` que creamos en el [taller anterior](../dockerfile-to-create-rails-projects/README_es.md). 

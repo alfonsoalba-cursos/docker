@@ -150,7 +150,7 @@ rails-tutorial-data
 Creamos de nuevo el contenedor con la opción `--mount` para montar el volumen:
 
 ```docker
-$ docker run  --rm -d --name rails-tutorial-db -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres --mount type=volume,src=raisl-tutorial-data,dst=/var/lib/postgresql/data postgres:14
+$ docker run  --rm -d --name rails-tutorial-db -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres --mount type=volume,src=rails-tutorial-data,dst=/var/lib/postgresql/data postgres:14
 927f86222d5bd6aa3369eecb7f9bfbf87708fe18a5e3a7b3ea83f3c32cb68efd
 ```
 
@@ -242,3 +242,9 @@ Borrar el contenedor `rails-tutorial-db` si no habéis usado la opción `--rm` y
 ```shell
 $ docker volume rm rails-tutorial-data
 ```
+
+## Siguiente paso
+
+En el [siguiente taller](../../0060-networking/red-bridge-para-rails-y-postgres/README_es.md), 
+utilizaremos una red de tipo _bridge_ para que nuestra aplicación Rails se pueda 
+conectar con la base de datos.
