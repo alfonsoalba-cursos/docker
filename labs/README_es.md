@@ -13,3 +13,5 @@
 * Módulo 5: Volúmenes
   * [Ejecutar aplicación en Rails usando un _bind volume_](0050-volumes/rails-app-with-bind-volume/README_es.md)
   * [Ejecutar postgres usando volúmenes](0050-volumes/postgres-database/README_es.md)
+* Módulo 6: Networking
+  * [Red _bridge_ para rails y postgres](0060-networking/red-bridge-para-rails-y-postgres/README_es.md)

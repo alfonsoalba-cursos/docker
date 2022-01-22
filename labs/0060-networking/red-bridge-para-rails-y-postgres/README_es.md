@@ -140,16 +140,188 @@ Podemos verificar que el contenedor con la base de datos se ha levantado correct
 
 ## Accediendo a la base de datos desde el contenedor de Rails
 
+Ejecutamos un intérprete de comandos en el contenedor `rails-tutorial` y, una vez dentro, usamos el cliente
+de postgres que instalamos para acceder a la base de datos
+
 ```shell
-$ docker exec -ti rails-tutorial psql -U postgres -h rails-tutorial-db
-Password for user postgres: 
+$ docker exec -ti rails-tutorial psql -U blog-development -h rails-tutorial
+Password for user postgres: (recordatorio: 12345678)
 psql (14.1 (Debian 14.1-1.pgdg110+1))
 Type "help" for help.
 
 postgres=# exit
 ```
 
+## Instalando paquetes en el contenedor
 
+Instalamos `vim` dentro del contendor:
+
+```shell
+root@210b0582271b:/blog$ apt install vim
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+E: Unable to locate package vim
+```
+
+Este error ocurre porque al generar la imagen borrarmos la caché de `apt` para hacer nuestra imagen más ligera.
+Tenemos que actualizar la caché antes de instalar el paquete:
+
+```shell
+root@210b0582271b:/blog$ apt update && apt install -y vim
+```
+
+## Creando el blog
+
+Para esta parte del taller, necesitaremos abrir un intérprete de comandos en el contenedor `rails-tutorial`
+en el que ejecutaremos diversos comandos de Rails:
+
+```shell
+$ docker exec -ti rails-tutorial bash
+root@210b0582271b:/blog$
+```
+
+### Configuración de la base de datos
+
+Al estar utilizando un _bind volume_, podemos editar los ficheros directamente desde el host.
+
+Editamos el fichero `blog/Gemfile` y añadimos la siguiente línea al principio del fichero:
+
+```Gemfile
+# Use sqlite3 as the database for Active Record
+#gem "sqlite3", "~> 1.4"
+gem "pg", "~> 1.2"
+```
+
+Dado que acabamos de modificar el código de nuestra aplicacion, **será necesario crear una nueva versión 
+de la imagen que lo incluya**.
+
+
+Guardar los cambios y ejecutar:
+
+```shell
+root@210b0582271b:/blog$ bundle install
+...
+...
+Using actiontext 7.0.1
+Using rails 7.0.1
+Installing pg 0.18.4 with native extensions
+Bundle complete! 17 Gemfile dependencies, 81 gems now installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
+```
+
+para instalar la dependencia. **Será necesario crear una nueva versión de la imagen que incluya
+esta gema ya instalada. Si no lo hacemos, la próxima vez que alguien use nuestra imagen para levantar
+la aplicación, esta no funcionará.**
+
+Editamos el fichero `blog/config/database.yml` y sustituimos el contenido del fichero por
+lo siguiente:
+
+```yml
+
+```
+
+Probamos la conexión a la base de datos. Para hacerlo, ejecutaremos dos comandos de Rails: borraremos las bases de
+datos que creamos en el [taller anterior](../../0050-volumes/postgres-database/README_es.md) y las
+volveremos a crear:
+
+```shell
+root@210b0582271b:/blog# bin/rails db:drop
+Dropped database 'blog-development'
+Dropped database 'blog-test'
+
+root@210b0582271b:/blog# bin/rails db:create
+Created database 'blog-development'
+Created database 'blog-test'
+```
+
+### Crear el blog
+
+Dentro del contenedor ejecutamos el siguiente comando para crear un modelo, vistas y un controlador
+que nos permitirán tener una aplicación básica en Rails:
+
+```shell
+root@210b0582271b:/blog# bin/rails g scaffold Article title:string body:text
+      invoke  active_record
+      create    db/migrate/20220122060833_create_articles.rb
+      create    app/models/article.rb
+      invoke    test_unit
+      create      test/models/article_test.rb
+      create      test/fixtures/articles.yml
+      invoke  resource_route
+       route    resources :articles
+      invoke  scaffold_controller
+      create    app/controllers/articles_controller.rb
+      invoke    erb
+      create      app/views/articles
+      create      app/views/articles/index.html.erb
+      create      app/views/articles/edit.html.erb
+      create      app/views/articles/show.html.erb
+      create      app/views/articles/new.html.erb
+      create      app/views/articles/_form.html.erb
+      create      app/views/articles/_article.html.erb
+      invoke    resource_route
+      invoke    test_unit
+      create      test/controllers/articles_controller_test.rb
+      create      test/system/articles_test.rb
+      invoke    helper
+      create      app/helpers/articles_helper.rb
+      invoke      test_unit
+      invoke    jbuilder
+      create      app/views/articles/index.json.jbuilder
+      create      app/views/articles/show.json.jbuilder
+      create      app/views/articles/_article.json.jbuilder
+```
+
+Modificar el fichero `config/routes.rb` y descomentar la siguiente línea:
+
+```ruby
+Rails.application.routes.draw do
+  resources :articles
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # Defines the root path route ("/")
+  root "articles#index" <------------------ QUITAR COMENTARIO O AÑADIR
+end
+```
+
+Añadimos la tabla a la base de datos:
+
+```shell
+root@210b0582271b:/blog# bin/rails db:migrate
+== 20220122060833 CreateArticles: migrating ===================================
+-- create_table(:articles)
+   -> 0.0055s
+== 20220122060833 CreateArticles: migrated (0.0056s) ==========================
+```
+
+Apuntamos el navegador a `http://localhost:3000` y obtendremos la página para crear, editar y borrar
+artículos.
+
+Nota: si esta página te da un error (por ejemplo que tienes una migración pendiente de la base de datos)
+puede que necesitemos reiniciar el contenedor:
+
+```shell
+$ docker container restart rails-tutorial
+```
+
+## Modificaciones al Dockerfile
+
+
+Llegados a este punto, necesitaremos crear una nueva imagen ya que:
+* Hemos añadido un paquete (`vim`)
+* Hemos modificado nuestro código
+* Hemos añadido una dependencia a la aplicación (gema `pg`)
+
+Modificamos el fichero `Dockerfile` ([verlo aquí](./Dockerfile_final_taller)) y generamos una nueva imagen
+con el mismo tag:
+
+```shell
+$ docker buildx build -t dockerlabs/rails-tutorial:0060-bridge .
+```
+
+En un proyecto real, esta imagen tendría un tag distinto, indicándonos que hemos liberado una nueva versión de la
+aplicación.
 ## Limpieza
 
 Tendremos que borrar:

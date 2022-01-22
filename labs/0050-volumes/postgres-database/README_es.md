@@ -235,6 +235,21 @@ postgres=# \du
 
 postgres=# \q
 ```
+
+## `blog-test`
+
+Como último paso, uy en preparación de los próximos talleres que vamos a realizar,
+creamos el usuario y la base de datos `blog-test`:
+
+```shell
+$ docker exec -i -u postgres rails-tutorial-db psql < blog-test.psql 
+CREATE DATABASE
+CREATE ROLE
+GRANT
+ALTER ROLE
+ALTER DATABASE
+```
+
 ## Limpieza
 
 Borrar el contenedor `rails-tutorial-db` si no habéis usado la opción `--rm` y el volumen `rails-tutorial-data`
