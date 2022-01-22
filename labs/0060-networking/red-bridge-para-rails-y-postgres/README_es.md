@@ -340,4 +340,5 @@ $ docker container rm rails-tutorial
 
 ## Siguiente paso
 
-Para poder trabajar con Rails, necesitaremos una base de datos. En el [siguiente taller](../labs\0050-volumes\rails-app-with-bind-volume/README_es.md) veremos cómo crearla y persistir los datos utilizando volúmenes.
+En el [siguiente taller](../../0070-docker-compose/aplicacion-rails-con-compose/README_es.md), 
+pondremos todas las piezas juntas a trabajar usando `docker compose`.

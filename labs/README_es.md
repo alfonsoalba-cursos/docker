@@ -15,3 +15,5 @@
   * [Ejecutar postgres usando volúmenes](0050-volumes/postgres-database/README_es.md)
 * Módulo 6: Networking
   * [Red _bridge_ para rails y postgres](0060-networking/red-bridge-para-rails-y-postgres/README_es.md)
+* Módulo 7: `docker compose`
+  * [Aplicación Rails con `docker compose`](0070-docker-compose/aplicacion-rails-con-compose/README_es.md)  

@@ -1,0 +1,23 @@
+---
+
+services:
+  db:
+    image: postgres:14
+    environment:
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_USER=postgres
+    volumes:
+    - rails-tutorial-db:/var/lib/postgresql/data
+  rails:
+    image: rails-tutorial:0070-compose
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment:
+    - RAILS_ENV=development
+    volumes:
+    - ./blog:/blog
+    ports:
+    - "3000:3000"
+volumes:
+  rails-tutorial-db:
