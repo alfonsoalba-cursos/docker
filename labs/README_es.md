@@ -19,3 +19,5 @@
   * [Aplicación Rails con `docker compose`](0070-docker-compose/aplicacion-rails-con-compose/README_es.md)  
 * Módulo 9: Configuración de `dockerd`
   * [Métricas con Prometheus](0090-configuracion-dockerd/metricas-con-prometheus/README_es.md)  
+* Módulo 10: _Container Technology Overview_
+  * [_Rootless mode_](0100-seguridad-docker/rootless-mode/README_es.md)
