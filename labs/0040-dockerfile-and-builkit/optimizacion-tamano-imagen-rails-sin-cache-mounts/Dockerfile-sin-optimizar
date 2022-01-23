@@ -1,0 +1,13 @@
+# syntax=docker/dockerfile:1
+
+FROM ruby:3.0
+
+RUN apt update && apt upgrade -y && \
+    apt install -y vim
+
+COPY ./blog /blog
+
+WORKDIR /blog
+RUN bundle install
+
+CMD ["bin/rails", "s", "-b", "0.0.0.0"]

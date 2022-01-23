@@ -106,3 +106,9 @@ Borrar la imagen `dockerlabs/rails-tutorial` y el contenedor `rails-tutorial` si
 $ docker image rm dockerlabs/rails-tutorial
 $ docker container rm rails-tutorial
 ```
+
+## Siguiente paso
+
+Si no podemos utilizar BuildKit ¿es posible librarse de la caché de `apt` de alguna manera?. La respuesta es 
+afirmativa: 
+[Optimización del tamaño de la imagen de Rails sin _cache mounts_](../../0040-dockerfile-and-builkit/optimizacion-tamano-imagen-rails/README_es.md)
