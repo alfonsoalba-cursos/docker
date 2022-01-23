@@ -36,13 +36,24 @@ Para poder ejectuar contenedores en un host
 
 **```dockerd``` se ejecuta por defecto con permisos de root.**
 
-Existe un modo ["Rootless"](https://docs.docker.com/engine/security/rootless/) 
+Existe un modo [_Rootless_](https://docs.docker.com/engine/security/rootless/) 
 
 Nos permite ejecutar `dockerd` sin privilegios de `root`
 
+notes:
+
+El modo _Rootless_ tiene 
+[ciertas limitaciones](https://docs.docker.com/engine/security/rootless/#known-limitations)
+como por ejemplo, que no soporta AppArmor ni se puede utilizar con redes de tipo
+_overlay_. Asegúrate de revisarlas antes de activar este modo en tu `dockerd`.
+
 ^^^^^^
 
-**Sólo los usuarios de confianza deben tener acceso administrativo al demonio '''dockerd'''**
+**Sólo los usuarios de confianza deben tener acceso administrativo al demonio `dockerd`**
+
+^^^^^^
+
+No montar la carpeta raiz `/` como un _bind volume_ de un contenedor.
 
 notes:
 
