@@ -278,7 +278,7 @@ De toda la información que nos da el comando `docker container inspect`, voy a 
 * Levantamos el contenedor si no lo tenemos levantado **sin usar la opción `--rm`**
 
 ```bash
-> docker container run --name docker-slides -p "8002:8002" -d kubernetescourse/slides-docker
+> docker container run --name docker-slides -p "8002:80" -d kubernetescourse/slides-docker
 ```
 
 ^^^^^^

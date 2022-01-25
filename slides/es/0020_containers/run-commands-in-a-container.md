@@ -19,7 +19,7 @@ el enlace a ambas.
 * Listar el contenido de la carpeta `slides`
 
 ```bash
-  > docker run --rm -p "8002:8002" --name docker-slides kubernetescourse/slides-docker
+  > docker run --rm -p "8002:80" --name docker-slides kubernetescourse/slides-docker
   > docker exec docker-slides ls
   Dockerfile
   LICENSE
@@ -86,7 +86,7 @@ El siguiente comando nos permite ejecutar una shell:
 * Vuelve a levantar el contenedor si por un casual lo has parado:
 
 ```bash
-  > docker run --rm -p "8002:8002" --name docker-slides kubernetescourse/slides-docker
+  > docker run --rm -p "8002:80" --name docker-slides kubernetescourse/slides-docker
 ```
 
 * 🤯 Intenta borrar todos los ficheros del contenedor: `rm -r /`
