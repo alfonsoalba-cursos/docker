@@ -10,7 +10,7 @@ por los contenedores
 ## La imagen
 
 Utilizaremos una aplicación node de ejemplo que tomaremos del catálogo disponible
-en Dokcer Hub: (https://hub.docker.com/r/bitnami/node-example/#!)[https://hub.docker.com/r/bitnami/node-example/#!]
+en Dokcer Hub: [https://hub.docker.com/r/bitnami/node-example/#!](https://hub.docker.com/r/bitnami/node-example/#!)
 
 ## El contenedor
 
