@@ -10,7 +10,7 @@ Podemos limitar los siguientes recursos utilizados por un contenedor:
 
 ^^^^^^
 
-### Limitación de memoria `--memory` y `--memory-swap`
+#### Limitación de memoria `--memory` y `--memory-swap`
 
 | --memory | --memory-swap |
 | -------- | ------------- |
@@ -29,7 +29,7 @@ La cantidad de swap que el contenedor usará será `memory - memory-swap`.
 
 ^^^^^^
 
-### Limitación de memoria `--memory` y `--memory-swap`
+#### Limitación de memoria `--memory` y `--memory-swap`
 
 | --memory | --memory-swap |
 | -------- | ------------- |
@@ -50,7 +50,7 @@ En el comando de ejemplo, ponemos un límite de memora de 25MB y tanta memoria s
 
 ^^^^^^
 
-### Limitación de memoria `--memory` y `--memory-swap`
+#### Limitación de memoria `--memory` y `--memory-swap`
 
 | --memory | --memory-swap |
 | -------- | ------------- |
@@ -69,7 +69,7 @@ En el ejemplo, el contenedor tendrá un límite de 25MB de memoria y 25MB de swa
 
 ^^^^^^
 
-### Limitación de memoria `--memory` y `--memory-swap`
+#### Limitación de memoria `--memory` y `--memory-swap`
 
 | --memory | --memory-swap |
 | -------- | ------------- |
@@ -87,7 +87,7 @@ En el ejemplo, el contenedor tendrá un límite de 25MB de memoria y 10MB de swa
 
 ^^^^^^
 
-### Limitación de memoria `--memory` y `--memory-swap`
+#### Limitación de memoria `--memory` y `--memory-swap`
 
 [`Your kernel does not support cgroup swap limit capabilities`](https://docs.docker.com/engine/install/linux-postinstall/#your-kernel-does-not-support-cgroup-swap-limit-capabilities)
 
@@ -95,7 +95,7 @@ Warning que sale en Debian/Ubuntu: swap desactivada por defecto en los cgroups.
 
 Se puede ignorar si no queremos utilizar estas _capabilities_ del kernel
 
-Se puede activar en grup usando
+Se puede activar en el gestor de arranque `grub` usando
 
 ```text
 GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
@@ -104,7 +104,7 @@ GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
 
 ^^^^^^
 
-### Limitación de memoria `--memory-reservation`
+#### Limitación de memoria `--memory-reservation`
 
 Límite blando de memoria que facilita la tarea de reservar memoria entre los contenedores.
 
@@ -118,7 +118,7 @@ Si docker detecta que empieza a faltar memoria en el sistema, entonces limitará
 
 ^^^^^^
 
-### Limitación de memoria `--memory-reservation`
+#### Limitación de memoria `--memory-reservation`
 
 `memory-reservation <= memory`
 
@@ -126,11 +126,11 @@ Si lo hacemos mayor, el valor de `--memory` tendrá preferencia
 
 ^^^^^^
 
-### Limitación de memoria `--oom-kill-disable`
+#### Limitación de memoria `--oom-kill-disable`
 
 Evita que un contenedor reciba la señal `OOM` del kernel
 
-**Siempre que activemos esta opción, utilizar `--memory` para limitar la memoria
+**Siempre que activemos esta opción, utilizar `--memory` para limitar la memoria**
 
 notes:
 
@@ -139,7 +139,7 @@ empezará a eliminar procesos del sistema
 
 ^^^^^^
 
-### Limitación de memoria `--kernel-memory`
+#### Limitación de memoria `--kernel-memory`
 
 La memoria del kernel incluye:
 * stack pages
@@ -154,7 +154,7 @@ lancen si el uso de memoria del kernel es alto
 
 ^^^^^^
 
-### Limitación de memoria `--kernel-memory`
+#### Limitación de memoria `--kernel-memory`
 
 ```shell
 $ docker container run  --memory 250M --kernel-memory 50M --rm -p "8002:80" kubernetescourse/slides-docker
@@ -165,7 +165,7 @@ para la memoria del kernel
 
 ^^^^^^
 
-### Limitación de memoria `--kernel-memory`
+#### Limitación de memoria `--kernel-memory`
 
 ```shell
 $ docker container run  --kernel-memory 50M --rm -p "8002:80" kubernetescourse/slides-docker
@@ -176,7 +176,7 @@ para la memoria del kernel
 
 ^^^^^^
 
-### Limitación de memoria `--memory-swappiness`
+#### Limitación de memoria `--memory-swappiness`
 
 Porcentage de memoria del contenedor que se puede pasar a swap
 
@@ -184,21 +184,21 @@ Valor entre 0 y 100
 
 ^^^^^^
 
-### Limitación de CPU `--cpu-shares`
-
-Por defecto, todos los contenedores reciben la misma proporción de ciclos de procesador.
+#### Limitación de CPU `--cpu-shares`
 
 El valor por defecto es de `1024`
+
+Todos los contenedores reciben la misma proporción de ciclos de procesador
 
 Podemos reducir esta proporción usando `--cpu-shares`
 
 **La proporción solo se aplica cuando se ejecutan procesos que usan intensivamente la CPU**
 
-Si el sistema tiene suficiente CPU, no se aplica límites.
+Si el sistema tiene suficiente CPU, no se aplican límites.
 
 ^^^^^^
 
-### Limitación de CPU `--cpu-shares`
+#### Limitación de CPU `--cpu-shares`
 
 * `C1` -> 1024
 * `C2` -> 512
@@ -209,7 +209,7 @@ el primero recibirá el 50% y los otros dos el 25% cada uno
 
 ^^^^^^
 
-### Limitación de CPU `--cpu-shares`
+#### Limitación de CPU `--cpu-shares`
 
 * `C1` -> 1024
 * `C2` -> 512
@@ -221,7 +221,7 @@ el primero recibirá el 50% y los otros dos el 25% cada uno
 
 ^^^^^^
 
-### Limitación de CPU `--cpu-period` y `--cpu-quota`
+#### Limitación de CPU `--cpu-period` y `--cpu-quota`
 
 Permiten configurar el uso de 
 [_CPU CFS (Completely Fair Scheduler)_](https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt)
@@ -239,7 +239,7 @@ notes:
 
 ^^^^^^
 
-### Limitación de CPU `--cpu-period` y `--cpu-quota`
+#### Limitación de CPU `--cpu-period` y `--cpu-quota`
 
 Permiten configurar el uso de 
 [_CPU CFS (Completely Fair Scheduler)_](https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt)
@@ -254,7 +254,7 @@ El contenedor recibirá un 2 CPUs cada 500ms
 
 ^^^^^^
 
-### Limitación de CPU `--cpus`
+#### Limitación de CPU `--cpus`
 
 Permite asignar un límite de CPUs usando porcentages en lugar de usando `--cpu-period` y `--cpu-quota`
 
@@ -266,7 +266,7 @@ El contenedor utilizará un 50% de una CPU
 
 ^^^^^^
 
-### Limitación de CPU `--cpuset-cpus`
+#### Limitación de CPU `--cpuset-cpus`
 
 Nos permiten seleccionar en qué CPU se ejecuta el contenedor
 
@@ -279,7 +279,7 @@ El contenedor se ejecuta en las CPUs 1 y 3
 
 ^^^^^^
 
-### Limitación de CPU `--blkio-weight`
+#### Limitación de CPU `--blkio-weight`
 
 Controla la proporción de ancho de banda IO que recibe cada contenedor
 
@@ -287,7 +287,7 @@ Valor entre 10 y 1000. El valor por defecto es 500
 
 ^^^^^^
 
-### Limitación de CPU `--blkio-weight`
+#### Limitación de CPU `--blkio-weight`
 
 ```shell
 $ docker run -it --name c1 --blkio-weight 300 ubuntu:14.04 /bin/bash
