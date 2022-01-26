@@ -27,9 +27,9 @@ ejecutar el código que está contenido en la imagen.
 * Vamos a levantar varias instancias del mismo objeto
 
 ```bash
-> docker run --rm -p "9003:8003" -d --name instancia1 kubernetescourse/slides-docker
-> docker run --rm -p "9004:8003" -d --name instancia2 kubernetescourse/slides-docker
-> docker run --rm -p "9005:8003" -d --name instancia3 kubernetescourse/slides-docker
+> docker run --rm -p "8003:80" -d --name instancia1 kubernetescourse/slides-docker
+> docker run --rm -p "8004:80" -d --name instancia2 kubernetescourse/slides-docker
+> docker run --rm -p "8005:80" -d --name instancia3 kubernetescourse/slides-docker
 ````
 
 notes:
@@ -37,13 +37,13 @@ notes:
 La opción -d ejecuta los contenedores en segundo plano.
 
 Prestad atención a la opción -p de cada comando. Si intentamos levantar los tres contenedores en el mismo puerto
-del host (9003) la segunda vez que ejecutemos el comando nos dará un error diciéndonos que ese puerto ya está ocupado:
+del host (8003) la segunda vez que ejecutemos el comando nos dará un error diciéndonos que ese puerto ya está ocupado:
 
 ```bash
-> docker run --rm -p "9004:8003" -d --name instancia2 kubernetescourse/slides-docker
+> docker run --rm -p "8003:80" -d --name instancia2 kubernetescourse/slides-docker
 
 docker: Error response from daemon: driver failed programming external connectivity on endpoint instancia2
-(7c1ea225545c23385619e7e9c3022d4607b11d22a8c5d18cb1f0cd589dd6db31): Bind for 0.0.0.0:9003 failed: port is already allocated.
+(7c1ea225545c23385619e7e9c3022d4607b11d22a8c5d18cb1f0cd589dd6db31): Bind for 0.0.0.0:8003 failed: port is already allocated.
 ```
 
 ^^^^^^

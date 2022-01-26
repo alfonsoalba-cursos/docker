@@ -68,7 +68,7 @@ alfonso             latest              343600d72822        2 minutes ago       
 ```bash
 docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
-Username: aagdockerid
+Username: kubernetescourse
 Password:
 Login Succeeded
 ```
@@ -94,8 +94,8 @@ Recordad: lo que realmente estamos haciendo es **decirle a `dockerd` que haga lo
   * `tag` es el tag que queremos subir al repositorio
 
 ```bash
-> docker image tag alfonso:latest aagdockerid/pruebas-alfonso:1.0.0
-> docker image push aagdockerid/pruebas-alfonso:1.0.0
+> docker image tag alfonso:latest kubernetescourse/pruebas-alfonso:1.0.0
+> docker image push kubernetescourse/pruebas-alfonso:1.0.0
 ```
 
 * ¡Ver nuestra imagen en Docker Hub! 💪
@@ -123,5 +123,5 @@ Resumen de los pasos que tenemos que dar para subir una imagen:
 * Crear un repositorio en el proveedor que queramos (nosotros hemos usado Docker Hub)
 * Generar la imagen que queramos subir
 * Hacer login con `docker login`
-* Tagear la imagen con `[user]/[repository]:[tag]`
+* Tagear la imagen con `[registry-url]/[user]/[repository]:[tag]`
 * Ejecutar `docker push [TAG]`

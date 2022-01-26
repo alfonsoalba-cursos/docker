@@ -3,7 +3,7 @@
 El comando para buscar imágenes es [`docker search`](https://docs.docker.com/engine/reference/commandline/search/)
 
 ```bash
-docker search becorecode
+docker search kubernetescourse
 ```
 
 Este comando busca por defecto en [Docker Hub](https://hub.docker.com)
