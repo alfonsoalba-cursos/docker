@@ -114,7 +114,7 @@ $ docker container run  --memory 250M --memory-reservation 500M --rm -p "8002:80
 
 El contenedor podrá usar hasta 500M de memoria. 
 
-Si docker detecta que empieza a faltar memoria en el sistema, entonces limitará la memoria a 200M
+Si docker detecta que empieza a faltar memoria en el sistema, entonces limitará la memoria a 250M
 
 ^^^^^^
 
@@ -157,7 +157,7 @@ lancen si el uso de memoria del kernel es alto
 #### Limitación de memoria `--kernel-memory`
 
 ```shell
-$ docker container run  --memory 250M --kernel-memory 50M --rm -p "8002:80" kubernetescourse/slides-docker
+$ docker container run  --memory 500M --kernel-memory 50M --rm -p "8002:80" kubernetescourse/slides-docker
 ```
 
 El contenedor usará 500M de memoria. De estos 500M, un máximo de 50M se podrán usar
@@ -246,7 +246,7 @@ Permiten configurar el uso de
 
 
 ```shell
-$ docker container run  --cpu-period=500000 --cpu-quota=100000 --rm -p "8002:80" kubernetescourse/slides-docker
+$ docker container run  --cpu-period=500000 --cpu-quota=1000000 --rm -p "8002:80" kubernetescourse/slides-docker
 ```
 
 El contenedor recibirá un 2 CPUs cada 500ms
