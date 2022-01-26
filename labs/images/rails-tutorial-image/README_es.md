@@ -23,7 +23,7 @@ Podremos acceder a la aplicacion en rails a través del puerto 3000, por lo que
 expondremos este puerto cuando creemos el contenedor:
 
 ```shell
-$ docker run -ti --name rails-tutorial -p 3000:3000 ruby:3.0-slim bash
+$ docker run -ti --name rails-tutorial -p 3000:3000 ruby:3.0 bash
 root@a0b361ddbfa8:/$ 
 ```
 
