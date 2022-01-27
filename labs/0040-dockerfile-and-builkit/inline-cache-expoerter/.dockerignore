@@ -1,0 +1,4 @@
+# We shouldn't ignore the blog/ folder anymore
+# We need to transfer it to our docker context so we can copy it
+# to our image
+# blog/

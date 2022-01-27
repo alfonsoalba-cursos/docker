@@ -11,6 +11,7 @@
   * [_BuildKit cache mounts_](0040-dockerfile-and-builkit/buildkit-cache-mounts/README_es.md)
   * [Optimización del tamaño de la imagen de Rails sin _cache mounts_](0040-dockerfile-and-builkit/optimizacion-tamano-imagen-rails-sin-cache-mounts/README_es.md)
   * [`docker buildx build --ssh`](0040-dockerfile-and-builkit/docker-build-ssh-option/README_es.md)
+  * [_Inline cache exporter_](0040-dockerfile-and-builkit/inline-cache-expoerter/README_es.md)
 * Módulo 5: Volúmenes
   * [Ejecutar aplicación en Rails usando un _bind volume_](0050-volumes/rails-app-with-bind-volume/README_es.md)
   * [Ejecutar postgres usando volúmenes](0050-volumes/postgres-database/README_es.md)
