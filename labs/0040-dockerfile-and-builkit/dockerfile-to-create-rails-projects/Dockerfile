@@ -8,4 +8,5 @@ RUN gem install rails
 RUN rails new $RAILS_PROJECT_NAME $RAILS_PARAMS
 
 FROM scratch
-COPY --from=build /blog .
+ARG RAILS_PROJECT_NAME
+COPY --from=build /$RAILS_PROJECT_NAME .

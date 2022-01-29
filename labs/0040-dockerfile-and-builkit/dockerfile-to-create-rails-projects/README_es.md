@@ -112,11 +112,15 @@ RUN gem install rails
 RUN rails new $RAILS_PROJECT_NAME $RAILS_PARAMS
 
 FROM scratch
-COPY --from=build /blog .
+ARG RAILS_PROJECT_NAME
+COPY --from=build /$RAILS_PROJECT_NAME .
 ```
 
 * En el primer paso (`FROM ruby:3.0 AS build`), ejecutamos todos los comandos de rails necesarios para crear el proyecto.
 * En el siguiene paso (`FROM scratch`) construimos una única capa que solo contiene la carpeta `/blog`
+* Las variables `ARG` en un _multi-stage_ build tienen validez dentro del contexto del paso en el que se definen. Si
+  queremos utilizarlas en varios pasos, tendremos de declararlas, como hemos hecho en este fichero `Dockerfile`.
+  [Más información aquí](https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact)
 
 Construimos la imagen y exportamos el contenido de esa capa a nuestro sistema de ficheros local:
 
