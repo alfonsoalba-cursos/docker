@@ -101,7 +101,7 @@ Este script será el que utilicemos como `CMD` en la imagen.
 Notar que el proceso 1 del contenedor será `bash` y no nuestro proceso, ya que en ejemplo,
 este se ejecuta dentro del intérprete de comandos.
 
- ^^^^^^
+^^^^^^
 
 #### Múltiples procesos: `supervisord`
 
