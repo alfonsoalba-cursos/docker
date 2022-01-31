@@ -16,7 +16,7 @@ Si no tienes la aplicación rails creada, sigue los pasos de ese taller para gen
 Una vez la hayas generado, copiala a la carpeta a este taller:
 
 ```shell
-$ cp -r ../../0060-networking/red-bridge-para-rails-y-postgres/README_es.md .
+$ cp -r ../../0060-networking/red-bridge-para-rails-y-postgres/blog .
 ```
 
 Después de copiar el código, asegúrate de que el fichero `blog/tmp/pids/server.pid` no existe. Si existe, bórralo.
@@ -482,6 +482,11 @@ Borra para la aplicación con `docker compose down`, borra el fichero `blog/tmp/
 
 ## Limpieza
 
+------
+⚠️ No borres los volúmenes si vas a realizar el siguiete taller
+------
+
+
 Tendremos que borrar:
 * Parar los servicios
 * Eliminar los volúmenes
@@ -491,3 +496,10 @@ Tendremos que borrar:
 $ docker compose down --volumes
 $ docker compose -p 0070 down --volumes
 ```
+
+
+## Siguiente paso
+
+En el [siguiente taller](../cache-con-volumenes/README_es.md) veremos cómo podemos utilizar
+volúmenes para cachear las gemas de nuestra aplicación y no tener que construir una nueva imagen
+cada vez que añadimos una nueva dependencia.

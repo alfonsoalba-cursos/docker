@@ -17,8 +17,9 @@ services:
     - RAILS_ENV=development
     volumes:
     - ./blog:/blog
+    - rails-bundle-cache:/usr/local/bundle
     ports:
     - "3000:3000"
 volumes:
   rails-tutorial-db:
-  
+  rails-bundle-cache:
