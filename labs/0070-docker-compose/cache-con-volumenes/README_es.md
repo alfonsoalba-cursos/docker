@@ -59,7 +59,9 @@ Para implementar esta funcionalidad, utilizaremos una de las gema más populares
 [`devise`](https://rubygems.org/gems/devise). 
 
 ---
+
 ⚠️ En este taller, sólo instalaremos la gema, no modificaremos el código de la aplicación.
+
 ---
 
 Editamos el fichero `blog/Gemfile` y añadimos la siguiente línea al final del fichero:
