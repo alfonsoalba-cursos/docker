@@ -4,7 +4,7 @@ Todos los comandos están ejecutados utilizando esta carpeta como ruta de trabaj
 
 ## Objetivo
 
-En el taller [Aplicación Rails con `docker compose](../aplicacion-rails-con-compose/README_es.md) 
+En el taller [Aplicación Rails con `docker compose`](../aplicacion-rails-con-compose/README_es.md) 
 levantamos nuestra aplicación rails multicontenedor utilizando `Compose V2`.
 
 Esta aplicación tiene un problema: cada vez que necesitemos añadir una nueva gema o un nuevo
@@ -13,7 +13,7 @@ paquete de npm, tendremos que crear una nueva imagen.
 El objetivo de este taller es ilustrar cómo podemos utilizar volúmenes para cachear estas dependencias
 y evitar construir la imagen cuando estas cambian.
 
-⚠️ Esta técnica es aplicable en entornoes en los que necesitamos una manera
+⚠️ Esta técnica es aplicable en entornos en los que necesitamos una manera
 rápida de cambiar el código y probar que funciona. Entorno típico es el de desarrollo. 
 En los entornos de producción las dependencias formarán parte de la imagen y necesitaremos
 construir una nueva cuándo estas cambien.
@@ -21,7 +21,7 @@ construir una nueva cuándo estas cambien.
 ## La aplicación
 
 Utilizaremos la aplicación `blog` que creamos en el taller 
-[Aplicación Rails con `docker compose](../aplicacion-rails-con-compose/README_es.md). 
+[Aplicación Rails con `docker compose`](../aplicacion-rails-con-compose/README_es.md). 
 Si no tienes la aplicación rails creada, sigue los pasos de ese taller para generarla.
 Una vez la hayas generado, copiala a la carpeta de este taller:
 
@@ -34,7 +34,7 @@ Después de copiar el código, asegúrate de que el fichero `blog/tmp/pids/serve
 ## Servicios
 
 Crearemos un fichero `compose.yaml` que contendrá los mismos servicios que utilizamos en el taller
-[Aplicación Rails con `docker compose](../aplicacion-rails-con-compose/README_es.md). Puedes ver la descripción
+[Aplicación Rails con `docker compose`](../aplicacion-rails-con-compose/README_es.md). Puedes ver la descripción
 detallada de estos servicios en ese taller:
 
 * `rails`: contenedor con el código de nuestra aplicación y que ejecutará el servidor de aplicaciones. 
@@ -58,11 +58,11 @@ de poder crear posts.
 Para implementar esta funcionalidad, utilizaremos una de las gema más populares de ruby: 
 [`devise`](https://rubygems.org/gems/devise). 
 
-------
+---
 ⚠️ En este taller, sólo instalaremos la gema, no modificaremos el código de la aplicación.
-------
+---
 
-Editamos el fichero `blog/Gemfile` y añadimos la siguiente al final del fichero:
+Editamos el fichero `blog/Gemfile` y añadimos la siguiente línea al final del fichero:
 
 ```ruby
 gem 'devise', '~> 4.8', '>= 4.8.1'
@@ -135,11 +135,12 @@ $ docker compose -p 0070 logs rails
 0070-rails-1  |         from bin/rails:3:in `<main>'
 ```
 
-Al parar los contenedores con el comando `docker compose down`, se ha borrado la capa del contenedor (en la queinstalamos 
+Al parar los contenedores con el comando `docker compose down`, se ha borrado la capa del contenedor `0070_rails`
+(en la que instalamos 
 la gema `devise`). Al volver a levantar el contenedor, se crea una capa nueva que no contiene la dependencia.
 
 Necesitaríamos construir una imagen nueva que incluya la dependencia. Para evitar tener que construir imágenes
-cada vez que hacemos esto utilizaremos un volume para almacenar las gemas.
+cada vez que hacemos esto utilizaremos un volumen para almacenar las gemas.
 
 ## Volumen para cacheado de gemas
 
@@ -157,7 +158,7 @@ crearemos un volúmen para cachear gemas.
 
 ¿En qué carpeta almacena ruby las gemas? mirando la 
 [documentación del comando `bundler`](https://bundler.io/v2.3/guides/bundler_docker_guide.html), vemos que 
-por defecto, esta se almacena en `/usr/local/bundle` 
+por defecto, estas se guardan en `/usr/local/bundle` 
 
 Modificaremos el fichero [`compose.yaml`](./compose.yaml) y añadimos las siguientes líneas:
 
@@ -274,9 +275,9 @@ Bundle complete! 18 Gemfile dependencies, 86 gems now installed.
 Use `bundle info [gemname]` to see where a bundled gem is installed.
 ```
 
-Notar que la ejecutar el comando, no se están instalando todas las gemas a pesar de que el volumen está vacío.
+Notar que al ejecutar el comando, no se están instalando todas las gemas a pesar de que el volumen está vacío.
 ¿Porqué? El motivo es que, como indicamos en las diapositivas, cuando se monta un volumen por primera vez,
-si este está vacío, se copia el contenido de la imagen. Eso es lo que eha ocurrido en este caso.
+si este está vacío, se copia el contenido de la imagen. Eso es lo que ha ocurrido en este caso.
 
 Levantamos de nuevo la aplicación:
 
