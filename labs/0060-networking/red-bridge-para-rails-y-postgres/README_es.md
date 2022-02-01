@@ -218,7 +218,32 @@ Editamos el fichero `blog/config/database.yml` y sustituimos el contenido del fi
 lo siguiente:
 
 ```yml
+# SQLite. Versions 3.8.0 and up are supported.
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem "sqlite3"
+#
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  host: rails-tutorial-db
 
+development:
+  <<: *default
+  database: blog-development
+  user: blog-development
+  password: 12345678
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: blog-test
+  user: blog-test
+  password: 12345678
 ```
 
 Probamos la conexión a la base de datos. Para hacerlo, ejecutaremos dos comandos de Rails: borraremos las bases de
