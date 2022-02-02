@@ -22,7 +22,7 @@ podéis ver algunas opciones de `docker-compose` que no están implementadas en 
 ^^^^^^
 ### Instalación
 
-[Documentación](https://docs.docker.com/compose/install/)
+[Documentación](https://docs.docker.com/compose/cli-command/#installing-compose-v2)
 
 notes:
 
