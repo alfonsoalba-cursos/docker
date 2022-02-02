@@ -1,7 +1,7 @@
 
 ### Variables de entorno
 
-Dentro de nuestro fichero `compose.yaml`, podemos utiizar variables de entornp
+Dentro de nuestro fichero `compose.yaml`, podemos utilizar variables de entorno
 
 ```yaml [3]
 services:
