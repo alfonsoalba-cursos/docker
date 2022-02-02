@@ -9,7 +9,6 @@
 Utilizamos un fichero `yaml` para definir los servicios (contenedores) que necesita nuestr aplicación
 
 ```yaml
-version: '3'
 services:
   web:
     build: .
@@ -18,8 +17,6 @@ services:
     volumes:
     - .:/code
     - images:/code/images
-    links:
-    - redis
   redis:
     image: redis
 volumes:
